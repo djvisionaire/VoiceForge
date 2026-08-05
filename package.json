@@ -1,0 +1,18 @@
+{
+  "name": "voice-forge-studios",
+  "version": "1.0.0",
+  "description": "Voice Forge Studios site with a small backend proxy to the ElevenLabs API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@elevenlabs/elevenlabs-js": "^2.60.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.19.2"
+  }
+}
