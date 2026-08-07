@@ -21,14 +21,14 @@
       </div>
     </div>
     <div class="navlinks">
-      <a href="#home" class="active">HOME</a>
-      <a href="#reels">DEMO REELS <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
-      <a href="#portfolio">PORTFOLIO</a>
-      <a href="#pricing">PRICING</a>
-      <a href="#ai">AI VOICES</a>
-      <a href="#book">BOOK SESSION</a>
-      <a href="#about">ABOUT</a>
-      <a href="#contact">CONTACT</a>
+      <a href="/" class="active">HOME</a>
+      <a href="/#reels">DEMO REELS <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
+      <a href="/portfolio">PORTFOLIO</a>
+      <a href="/pricing">PRICING</a>
+      <a href="/ai-voices">AI VOICES</a>
+      <a href="/#book">BOOK SESSION</a>
+      <a href="/about">ABOUT</a>
+      <a href="/contact">CONTACT</a>
     </div>
     <div class="nav-right">
       <button class="btn btn-ghost">LOGIN</button>
@@ -77,6 +77,7 @@
       </div>
     </div>
 
+    <div class="hero-sidebar">
     <div class="book-card" id="book">
       <h3>BOOK A <span>SESSION</span></h3>
       <div class="sub">Fast. Easy. Professional.</div>
@@ -84,7 +85,7 @@
       <div class="field">
         <label>Project Type</label>
         <div class="select">
-          <select>
+          <select id="bookProjectType">
             <option>Commercial</option>
             <option>Radio Ad</option>
             <option>Audiobook Narration</option>
@@ -98,7 +99,7 @@
       <div class="field">
         <label>Script Length</label>
         <div class="select">
-          <select>
+          <select id="bookScriptLength">
             <option>Up to 60 Seconds</option>
             <option>60–120 Seconds</option>
             <option>Full Audiobook Chapter</option>
@@ -110,7 +111,7 @@
       <div class="field">
         <label>Delivery Time</label>
         <div class="select">
-          <select>
+          <select id="bookDeliveryTime">
             <option>Standard (3-5 Days)</option>
             <option>Rush (24-48 Hours)</option>
             <option>Same Day</option>
@@ -119,133 +120,45 @@
         </div>
       </div>
 
-      <button class="btn btn-orange"><i class="fa-regular fa-calendar-check"></i> CHOOSE DATE &amp; TIME</button>
+      <button class="btn btn-orange" onclick="openBookingModal()"><i class="fa-regular fa-calendar-check"></i> CHOOSE DATE &amp; TIME</button>
       <div class="book-note"><i class="fa-solid fa-check"></i>Secure<span class="sep">•</span>Instant Quote<span class="sep">•</span>100% Professional</div>
+    </div>
     </div>
   </div>
 </section>
 
 <section id="reels">
   <div class="wrap">
-    <div class="grid-2col">
-      <div>
-        <div class="section-head"><span class="label">FEATURED DEMO</span></div>
-        <div class="player-card">
-          <div class="thumb"><i class="fa-solid fa-play"></i></div>
-          <div class="track-meta">
-            <div class="t">Commercial Demo Reel</div>
-            <div class="d">Energetic • Confident • Bold<br>0:45</div>
-          </div>
-          <button class="play-round" onclick="toggleWave(this)"><i class="fa-solid fa-play"></i></button>
-          <div class="wave" id="mainWave"></div>
-          <div class="vol"><i class="fa-solid fa-volume-high"></i><input type="range" min="0" max="100" value="70"></div>
-          <button class="icon-btn"><i class="fa-solid fa-download"></i></button>
-          <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
-          <button class="icon-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
-        </div>
-        <div class="player-times" style="margin-top:8px;"><span>0:00</span><span>0:45</span></div>
-
-        <div class="section-head" style="margin-top:34px;">
-          <span class="label">DEMO REELS</span>
-          <a class="view-all" href="#">VIEW ALL REELS <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        <div class="reels-row" id="reelsRow">
-          <div class="reel-card"><div class="reel-thumb t1"><i class="fa-solid fa-play play-i"></i></div>
-            <div class="reel-info"><div class="row1"><span>Commercial</span><span class="dur">0:38</span></div><div class="tag">Energetic</div></div></div>
-          <div class="reel-card"><div class="reel-thumb t2"><i class="fa-solid fa-play play-i"></i></div>
-            <div class="reel-info"><div class="row1"><span>Corporate</span><span class="dur">0:46</span></div><div class="tag">Professional</div></div></div>
-          <div class="reel-card"><div class="reel-thumb t3"><i class="fa-solid fa-play play-i"></i></div>
-            <div class="reel-info"><div class="row1"><span>Movie Trailer</span><span class="dur">0:48</span></div><div class="tag">Epic</div></div></div>
-          <div class="reel-card"><div class="reel-thumb t4"><i class="fa-solid fa-play play-i"></i></div>
-            <div class="reel-info"><div class="row1"><span>Character Voices</span><span class="dur">0:41</span></div><div class="tag">Animated</div></div></div>
-          <div class="reel-card"><div class="reel-thumb t5"><i class="fa-solid fa-play play-i"></i></div>
-            <div class="reel-info"><div class="row1"><span>Explainer Video</span><span class="dur">0:39</span></div><div class="tag">Clear</div></div></div>
-          <div class="reel-card"><div class="reel-thumb t6"><i class="fa-solid fa-play play-i"></i></div>
-            <div class="reel-info"><div class="row1"><span>Audiobook</span><span class="dur">0:52</span></div><div class="tag">Warm</div></div></div>
-        </div>
+    <div class="section-head"><span class="label">FEATURED DEMO</span></div>
+    <div class="player-card" style="padding:12px 16px;">
+      <div class="thumb" style="width:48px;height:48px;"><i class="fa-solid fa-play"></i></div>
+      <div class="track-meta">
+        <div class="t">Broadcast Demo Reel</div>
+        <div class="d">Social Media • Narration • Storytelling</div>
       </div>
+      <button class="play-round" id="featuredPlayBtn" onclick="toggleFeaturedPlay()"><i class="fa-solid fa-play"></i></button>
+      <div class="wave" id="mainWave" onclick="seekFeatured(event)"></div>
+      <span id="featuredTimeLabel" style="color:var(--muted-2);font-size:11px;white-space:nowrap;">0:00 / 0:20</span>
+      <div class="vol"><i class="fa-solid fa-volume-high"></i><input type="range" min="0" max="100" value="70" oninput="setFeaturedVolume(this.value)"></div>
+      <a class="icon-btn" href="audio/commercial-demo-reel.mp3" download="Voice-Forge-Commercial-Demo-Reel.mp3" style="text-decoration:none;"><i class="fa-solid fa-download"></i></a>
+      <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
+      <button class="icon-btn" onclick="this.classList.toggle('liked')"><i class="fa-regular fa-heart"></i></button>
+      <audio id="featuredAudio" src="audio/commercial-demo-reel.mp3" preload="metadata"></audio>
+    </div>
 
-      <div>
-        <div class="section-head"><span class="label">AI VOICE GENERATOR</span></div>
-        <div class="ai-card" id="ai">
-          <div class="ai-card-head">
-            <h4>AI VOICE <span>GENERATOR</span></h4>
-            <span class="badge-green">POWERED BY ELEVENLABS</span>
-          </div>
-          <textarea class="ai-textarea" id="ttsText" maxlength="5000" oninput="document.getElementById('cc').textContent=this.value.length">Welcome to Voice Forge Studios. Where powerful voices bring your message to life.</textarea>
-          <div class="char-count"><span id="cc">72</span> / 5000</div>
-
-          <div class="field" style="margin-bottom:6px;">
-            <label>Voice</label>
-            <div class="select">
-              <select id="voiceSelect">
-                <option>Loading voices…</option>
-              </select>
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
-          </div>
-
-          <div class="field" style="margin-bottom:6px;">
-            <label>Model</label>
-            <div class="select">
-              <select id="modelSelect">
-                <option value="eleven_flash_v2_5">Flash v2.5 (fastest)</option>
-                <option value="eleven_multilingual_v2">Multilingual v2 (highest quality)</option>
-                <option value="eleven_v3">Eleven v3 (most expressive)</option>
-              </select>
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
-          </div>
-
-          <button class="btn btn-orange" id="genBtn" onclick="generatePreview()"><i class="fa-solid fa-wave-square"></i> <span id="genBtnLabel">GENERATE PREVIEW</span></button>
-          <div id="genError" style="color:#ff6b6b;font-size:12px;margin-top:10px;display:none;"></div>
-
-          <div class="ai-preview">
-            <button class="play-round" id="aiPlayBtn" style="width:32px;height:32px;" onclick="toggleAiPlayback()"><i class="fa-solid fa-play" style="font-size:11px;"></i></button>
-            <div class="wave" id="aiWave"></div>
-            <span style="color:var(--muted-2);font-size:11px;white-space:nowrap;" id="aiTimeLabel">0:00 / 0:00</span>
-            <button class="icon-btn" id="aiDownloadBtn" style="width:28px;height:28px;"><i class="fa-solid fa-download" style="font-size:12px;"></i></button>
-          </div>
-          <audio id="ttsAudio" style="display:none;"></audio>
-        </div>
-
-        <div class="pay-card" style="margin-top:24px;">
-          <h4>SECURE PAYMENT</h4>
-          <div class="sub">Powered by Stripe</div>
-          <div class="pay-icons">
-            <div class="pi">VISA</div>
-            <div class="pi" style="background:#eb001b1a;color:#ff6666;">MC</div>
-            <div class="pi">AMEX</div>
-            <div class="pi"><i class="fa-brands fa-apple-pay" style="font-size:16px;"></i></div>
-            <div class="pi">G Pay</div>
-            <div class="pi"><i class="fa-brands fa-paypal" style="font-size:14px;color:#4b9cf0;"></i></div>
-          </div>
-          <div class="pay-note"><i class="fa-solid fa-lock"></i> Your payment information is 100% secure.</div>
-        </div>
-
-        <div class="contact-card" style="margin-top:24px;" id="contact">
-          <h4>GET IN TOUCH</h4>
-          <div class="form-row">
-            <input class="input" placeholder="Your Name">
-            <input class="input" placeholder="Email Address">
-          </div>
-          <div class="form-row">
-            <input class="input" placeholder="Company">
-            <input class="input" placeholder="Phone Number">
-          </div>
-          <div class="form-row">
-            <div class="select"><select><option>Project Type</option><option>Commercial</option><option>Audiobook</option><option>Explainer Video</option></select><i class="fa-solid fa-chevron-down"></i></div>
-            <div class="select"><select><option>Budget Range</option><option>$100–$500</option><option>$500–$2,000</option><option>$2,000+</option></select><i class="fa-solid fa-chevron-down"></i></div>
-          </div>
-          <textarea class="input" placeholder="Tell us about your project..."></textarea>
-          <div class="upload-row">
-            <label>Upload Script (Optional)</label>
-            <button class="btn btn-outline" type="button">Choose File</button>
-            <span class="fname">No file chosen</span>
-          </div>
-          <button class="btn btn-orange"><i class="fa-solid fa-paper-plane"></i> SEND MESSAGE</button>
-        </div>
-      </div>
+    <div class="section-head" style="margin-top:22px;">
+      <span class="label">DEMO REELS</span>
+      <a class="view-all" href="#">VIEW ALL REELS <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="reels-row" id="reelsRow">
+      <div class="reel-card"><div class="reel-thumb t1"><i class="fa-solid fa-play play-i"></i></div>
+        <div class="reel-info"><div class="row1"><span>Commercial</span><span class="dur">0:38</span></div><div class="tag">Energetic</div></div></div>
+      <div class="reel-card"><div class="reel-thumb t2"><i class="fa-solid fa-play play-i"></i></div>
+        <div class="reel-info"><div class="row1"><span>Corporate</span><span class="dur">0:46</span></div><div class="tag">Professional</div></div></div>
+      <div class="reel-card"><div class="reel-thumb t3"><i class="fa-solid fa-play play-i"></i></div>
+        <div class="reel-info"><div class="row1"><span>Movie Trailer</span><span class="dur">0:48</span></div><div class="tag">Epic</div></div></div>
+      <div class="reel-card"><div class="reel-thumb t4"><i class="fa-solid fa-play play-i"></i></div>
+        <div class="reel-info"><div class="row1"><span>Character Voices</span><span class="dur">0:41</span></div><div class="tag">Animated</div></div></div>
     </div>
   </div>
 </section>
@@ -271,7 +184,7 @@
       <div>
         <div class="section-head">
           <span class="label">FEATURED PORTFOLIO</span>
-          <a class="view-all" href="#">VIEW PORTFOLIO <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="view-all" href="/portfolio">VIEW PORTFOLIO <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="portfolio-grid">
           <div class="pf-card"><div class="pf-thumb pf1"><i class="fa-brands fa-nike logo-glyph"></i><i class="fa-solid fa-play play-i"></i></div>
@@ -306,6 +219,51 @@
   </div>
 </section>
 
+<section>
+  <div class="wrap">
+    <div class="bottom-grid">
+      <div class="pay-card">
+        <h4>SECURE PAYMENT</h4>
+        <div class="sub">Powered by Stripe</div>
+        <div class="pay-icons">
+          <div class="pi">VISA</div>
+          <div class="pi" style="background:#eb001b1a;color:#ff6666;">MC</div>
+          <div class="pi">AMEX</div>
+          <div class="pi"><i class="fa-brands fa-apple-pay" style="font-size:16px;"></i></div>
+          <div class="pi">G Pay</div>
+          <div class="pi"><i class="fa-brands fa-paypal" style="font-size:14px;color:#4b9cf0;"></i></div>
+        </div>
+        <div class="pay-note"><i class="fa-solid fa-lock"></i> Your payment information is 100% secure.</div>
+      </div>
+
+      <div class="contact-card" id="contact">
+        <h4>GET IN TOUCH</h4>
+        <div class="form-row">
+          <input class="input" id="ctName" placeholder="Your Name">
+          <input class="input" id="ctEmail" placeholder="Email Address">
+        </div>
+        <div class="form-row">
+          <input class="input" id="ctCompany" placeholder="Company">
+          <input class="input" id="ctPhone" placeholder="Phone Number">
+        </div>
+        <div class="form-row">
+          <div class="select"><select id="ctProjectType"><option>Project Type</option><option>Commercial</option><option>Audiobook</option><option>Explainer Video</option></select><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="select"><select id="ctBudget"><option>Budget Range</option><option>$100–$500</option><option>$500–$2,000</option><option>$2,000+</option></select><i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <textarea class="input" id="ctMessage" placeholder="Tell us about your project..."></textarea>
+        <div class="upload-row">
+          <label>Upload Script (Optional)</label>
+          <button class="btn btn-outline" type="button">Choose File</button>
+          <span class="fname">No file chosen</span>
+        </div>
+        <div id="ctError" style="color:#ff6b6b;font-size:12px;margin-bottom:10px;display:none;"></div>
+        <div id="ctSuccess" style="color:var(--green);font-size:12.5px;margin-bottom:10px;display:none;"><i class="fa-solid fa-circle-check"></i> Message sent — we'll be in touch shortly.</div>
+        <button class="btn btn-orange" id="ctSubmitBtn" onclick="submitHomeContactForm()"><i class="fa-solid fa-paper-plane"></i> <span id="ctSubmitLabel">SEND MESSAGE</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   © 2026 <span>Voice Forge</span> Studios. Crafted for voices that command attention.
 </footer>
@@ -323,8 +281,7 @@
     }
     el.innerHTML = html;
   }
-  buildWave('mainWave', 90, 0.62);
-  buildWave('aiWave', 60, 0.3);
+  buildWave('mainWave', 90, 0);
 
   // hero big waveform svg lines
   (function(){
@@ -352,106 +309,47 @@
     }
   }
 
-  /* ---------------- ElevenLabs API wiring ---------------- */
-  // The frontend never talks to ElevenLabs directly — it only ever calls our
-  // own backend (server.js), which holds the real API key server-side.
-  const API_BASE = ''; // same origin, since server.js serves this file too
+  /* ---------------- Featured Demo playback ---------------- */
+  const featuredAudio = document.getElementById('featuredAudio');
+  const featuredPlayBtn = document.getElementById('featuredPlayBtn');
+  const featuredTimeLabel = document.getElementById('featuredTimeLabel');
 
-  let currentAudioUrl = null;
-
-  async function loadVoices(){
-    const select = document.getElementById('voiceSelect');
-    try{
-      const res = await fetch(`${API_BASE}/api/voices`);
-      if(!res.ok) throw new Error('Failed to load voices (' + res.status + ')');
-      const data = await res.json();
-      const voices = data.voices || [];
-      select.innerHTML = voices.map(v =>
-        `<option value="${v.voice_id}">${v.name}${v.category ? ' — ' + v.category : ''}</option>`
-      ).join('');
-      if(voices.length === 0){
-        select.innerHTML = '<option value="">No voices found on this account</option>';
-      }
-    } catch(err){
-      select.innerHTML = '<option value="">Could not load voices — check server</option>';
-      console.error(err);
+  function toggleFeaturedPlay(){
+    if(!featuredAudio) return;
+    const icon = featuredPlayBtn.querySelector('i');
+    if(featuredAudio.paused){
+      featuredAudio.play();
+      icon.classList.replace('fa-play','fa-pause');
+    } else {
+      featuredAudio.pause();
+      icon.classList.replace('fa-pause','fa-play');
     }
   }
 
-  async function generatePreview(){
-    const btn = document.getElementById('genBtn');
-    const label = document.getElementById('genBtnLabel');
-    const errBox = document.getElementById('genError');
-    const text = document.getElementById('ttsText').value.trim();
-    const voiceId = document.getElementById('voiceSelect').value;
-    const modelId = document.getElementById('modelSelect').value;
-
-    errBox.style.display = 'none';
-    if(!text){ errBox.textContent = 'Enter some script text first.'; errBox.style.display='block'; return; }
-    if(!voiceId){ errBox.textContent = 'Choose a voice first.'; errBox.style.display='block'; return; }
-
-    btn.disabled = true;
-    label.textContent = 'GENERATING…';
-
-    try{
-      const res = await fetch(`${API_BASE}/api/generate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, voice_id: voiceId, model_id: modelId })
-      });
-
-      if(!res.ok){
-        const errText = await res.text();
-        throw new Error(errText || ('Request failed (' + res.status + ')'));
-      }
-
-      const blob = await res.blob();
-      if(currentAudioUrl) URL.revokeObjectURL(currentAudioUrl);
-      currentAudioUrl = URL.createObjectURL(blob);
-
-      const audio = document.getElementById('ttsAudio');
-      audio.src = currentAudioUrl;
-
-      const dlBtn = document.getElementById('aiDownloadBtn');
-      dlBtn.onclick = () => {
-        const a = document.createElement('a');
-        a.href = currentAudioUrl;
-        a.download = 'voice-forge-preview.mp3';
-        a.click();
-      };
-
-      buildWave('aiWave', 60, 0);
-      audio.onloadedmetadata = () => {
-        document.getElementById('aiTimeLabel').textContent = `0:00 / ${formatTime(audio.duration)}`;
-      };
-      audio.ontimeupdate = () => {
-        const pct = audio.duration ? audio.currentTime / audio.duration : 0;
-        highlightWave('aiWave', pct);
-        document.getElementById('aiTimeLabel').textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-      };
-      audio.onended = () => {
-        document.getElementById('aiPlayBtn').querySelector('i').classList.replace('fa-pause','fa-play');
-      };
-
-      audio.play();
-      document.getElementById('aiPlayBtn').querySelector('i').classList.replace('fa-play','fa-pause');
-
-    } catch(err){
-      console.error(err);
-      errBox.textContent = 'Generation failed: ' + err.message;
-      errBox.style.display = 'block';
-    } finally {
-      btn.disabled = false;
-      label.textContent = 'GENERATE PREVIEW';
-    }
+  function setFeaturedVolume(v){
+    if(featuredAudio) featuredAudio.volume = v / 100;
   }
 
-  function toggleAiPlayback(){
-    const audio = document.getElementById('ttsAudio');
-    if(!audio.src) return;
-    const icon = document.getElementById('aiPlayBtn').querySelector('i');
-    if(audio.paused){ audio.play(); icon.classList.replace('fa-play','fa-pause'); }
-    else { audio.pause(); icon.classList.replace('fa-pause','fa-play'); }
+  function seekFeatured(evt){
+    if(!featuredAudio || !featuredAudio.duration) return;
+    const wave = document.getElementById('mainWave');
+    const rect = wave.getBoundingClientRect();
+    const pct = Math.min(1, Math.max(0, (evt.clientX - rect.left) / rect.width));
+    featuredAudio.currentTime = pct * featuredAudio.duration;
+  }
+
+  if(featuredAudio){
+    featuredAudio.addEventListener('loadedmetadata', () => {
+      featuredTimeLabel.textContent = `0:00 / ${formatTime(featuredAudio.duration)}`;
+    });
+    featuredAudio.addEventListener('timeupdate', () => {
+      const pct = featuredAudio.duration ? featuredAudio.currentTime / featuredAudio.duration : 0;
+      highlightWave('mainWave', pct);
+      featuredTimeLabel.textContent = `${formatTime(featuredAudio.currentTime)} / ${formatTime(featuredAudio.duration)}`;
+    });
+    featuredAudio.addEventListener('ended', () => {
+      featuredPlayBtn.querySelector('i').classList.replace('fa-pause','fa-play');
+    });
   }
 
   function formatTime(t){
@@ -467,7 +365,108 @@
     bars.forEach((b,i) => b.classList.toggle('active', i < activeCount));
   }
 
-  loadVoices();
+  async function submitHomeContactForm(){
+    const name = document.getElementById('ctName').value.trim();
+    const email = document.getElementById('ctEmail').value.trim();
+    const errBox = document.getElementById('ctError');
+    const successBox = document.getElementById('ctSuccess');
+    const btn = document.getElementById('ctSubmitBtn');
+    const label = document.getElementById('ctSubmitLabel');
+
+    errBox.style.display = 'none';
+    successBox.style.display = 'none';
+
+    if(!name || !email){
+      errBox.textContent = 'Please enter your name and email.';
+      errBox.style.display = 'block';
+      return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      errBox.textContent = 'Please enter a valid email address.';
+      errBox.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    label.textContent = 'SENDING…';
+
+    try{
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, email,
+          company: document.getElementById('ctCompany').value.trim(),
+          phone: document.getElementById('ctPhone').value.trim(),
+          projectType: document.getElementById('ctProjectType').value,
+          budget: document.getElementById('ctBudget').value,
+          message: document.getElementById('ctMessage').value.trim()
+        })
+      });
+      if(!res.ok){
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+      successBox.style.display = 'block';
+      ['ctName','ctEmail','ctCompany','ctPhone','ctMessage'].forEach(id => document.getElementById(id).value = '');
+    } catch(err){
+      errBox.textContent = err.message;
+      errBox.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      label.textContent = 'SEND MESSAGE';
+    }
+  }
 </script>
+
+<!-- Booking Modal -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
+
+    <!-- Step 1: Calendar + time slots -->
+    <div id="bookStep1">
+      <h3 class="modal-title">CHOOSE A <span>DATE &amp; TIME</span></h3>
+      <div class="modal-sub" id="bookSummary"></div>
+
+      <div class="calendar-nav">
+        <button class="cal-arrow" id="calPrev" onclick="calShift(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="cal-month" id="calMonthLabel"></div>
+        <button class="cal-arrow" id="calNext" onclick="calShift(1)"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+      <div class="calendar-grid" id="calGrid"></div>
+
+      <div id="slotsWrap" style="display:none;">
+        <div class="slots-label">Available times — <span id="slotsDateLabel"></span></div>
+        <div class="slots-grid" id="slotsGrid"></div>
+      </div>
+      <div id="slotsLoading" style="display:none;color:var(--muted);font-size:12.5px;margin-top:10px;">Checking availability…</div>
+    </div>
+
+    <!-- Step 2: Contact details -->
+    <div id="bookStep2" style="display:none;">
+      <h3 class="modal-title">YOUR <span>DETAILS</span></h3>
+      <div class="modal-sub" id="bookSummary2"></div>
+      <div class="field"><label>Name</label><input class="input" id="bkName" placeholder="Your name"></div>
+      <div class="field"><label>Email</label><input class="input" id="bkEmail" placeholder="you@example.com"></div>
+      <div class="field"><label>Phone (optional)</label><input class="input" id="bkPhone" placeholder="(555) 000-0000"></div>
+      <div id="bookError" style="color:#ff6b6b;font-size:12px;margin-bottom:10px;display:none;"></div>
+      <div style="display:flex;gap:12px;">
+        <button class="btn btn-outline" style="flex:1;" onclick="backToStep1()">BACK</button>
+        <button class="btn btn-orange" id="confirmBookBtn" style="flex:2;" onclick="submitBooking()">CONFIRM BOOKING</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Success -->
+    <div id="bookStep3" style="display:none;text-align:center;padding:20px 0;">
+      <i class="fa-solid fa-circle-check" style="font-size:44px;color:var(--green);"></i>
+      <h3 class="modal-title" style="margin-top:16px;">BOOKING <span>REQUESTED</span></h3>
+      <p style="color:var(--silver);font-size:13.5px;margin-top:10px;" id="bookConfirmText"></p>
+      <button class="btn btn-orange" style="margin-top:20px;" onclick="closeBookingModal()">DONE</button>
+    </div>
+  </div>
+</div>
+
+<script src="booking.js"></script>
 </body>
 </html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Voice Forge Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-hero{
+    padding:56px 0 40px;text-align:center;
+    background:radial-gradient(circle at 50% 0%, rgba(245,130,13,0.14), transparent 55%);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .page-hero .eyebrow{justify-content:center;display:flex;}
+  .page-hero h1{font-size:clamp(32px,5vw,52px);color:var(--silver);line-height:1.05;}
+  .page-hero h1 .accent{
+    color:var(--orange);
+    background:linear-gradient(180deg,var(--orange-2),var(--orange));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .page-hero p{color:var(--muted);font-size:14px;max-width:560px;margin:14px auto 0;line-height:1.6;}
+
+  .contact-layout{display:grid;grid-template-columns:0.8fr 1.2fr;gap:28px;align-items:start;}
+
+  .info-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:26px;}
+  .info-row{display:flex;gap:14px;margin-bottom:20px;align-items:flex-start;}
+  .info-row i{color:var(--orange);font-size:16px;margin-top:2px;width:20px;}
+  .info-row h5{font-family:'Oswald';font-size:12.5px;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;margin-bottom:4px;}
+  .info-row p{color:var(--silver);font-size:13.5px;line-height:1.5;}
+  .info-row a{color:var(--silver);}
+  .info-row a:hover{color:var(--orange-2);}
+  .social-row{display:flex;gap:10px;margin-top:20px;}
+  .social-row a{
+    width:34px;height:34px;border-radius:50%;background:var(--panel-2);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+  }
+  .social-row a:hover{color:var(--orange-2);border-color:var(--orange);}
+
+  @media (max-width:1100px){ .contact-layout{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark"><i class="fa-solid fa-microphone"></i><span class="f">F</span></div>
+      <div class="logo-text">
+        <div class="l1">VOICE <span>FORGE</span></div>
+        <div class="l2">STUDIOS</div>
+      </div>
+    </div>
+    <div class="navlinks">
+      <a href="/">HOME</a>
+      <a href="/#reels">DEMO REELS <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
+      <a href="/portfolio">PORTFOLIO</a>
+      <a href="/pricing">PRICING</a>
+      <a href="/ai-voices">AI VOICES</a>
+      <a href="/#book">BOOK SESSION</a>
+      <a href="/about">ABOUT</a>
+      <a href="/contact" class="active">CONTACT</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-ghost">LOGIN</button>
+      <button class="btn btn-orange">GET A QUOTE</button>
+    </div>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">LET'S TALK ABOUT YOUR PROJECT</div>
+    <h1>GET IN <span class="accent">TOUCH</span></h1>
+    <p>Questions before booking? Need a custom quote? Send us a message and we'll get back to you within one business day.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="contact-layout">
+      <div class="info-card">
+        <div class="info-row">
+          <i class="fa-solid fa-envelope"></i>
+          <div><h5>Email</h5><p><a href="mailto:hello@voiceforgestudios.com">hello@voiceforgestudios.com</a></p></div>
+        </div>
+        <div class="info-row">
+          <i class="fa-solid fa-phone"></i>
+          <div><h5>Phone</h5><p><a href="tel:+15550123456">(555) 012-3456</a></p></div>
+        </div>
+        <div class="info-row">
+          <i class="fa-solid fa-location-dot"></i>
+          <div><h5>Studio</h5><p>412 Waverly Ave, Suite 3<br>Austin, TX 78701</p></div>
+        </div>
+        <div class="info-row">
+          <i class="fa-solid fa-clock"></i>
+          <div><h5>Hours</h5><p>Mon–Sat, 9:00 AM – 5:00 PM CT<br>Closed Sundays</p></div>
+        </div>
+        <div class="social-row">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <h4>SEND US A MESSAGE</h4>
+        <div class="form-row">
+          <input class="input" id="cpName" placeholder="Your Name">
+          <input class="input" id="cpEmail" placeholder="Email Address">
+        </div>
+        <div class="form-row">
+          <input class="input" id="cpCompany" placeholder="Company">
+          <input class="input" id="cpPhone" placeholder="Phone Number">
+        </div>
+        <div class="form-row">
+          <div class="select"><select id="cpProjectType"><option>Project Type</option><option>Commercial</option><option>Corporate Narration</option><option>Audiobook</option><option>Explainer Video</option><option>Custom / Enterprise</option></select><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="select"><select id="cpBudget"><option>Budget Range</option><option>$100–$500</option><option>$500–$2,000</option><option>$2,000+</option></select><i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <textarea class="input" id="cpMessage" placeholder="Tell us about your project..." style="height:110px;"></textarea>
+        <div class="upload-row">
+          <label>Upload Script (Optional)</label>
+          <button class="btn btn-outline" type="button">Choose File</button>
+          <span class="fname">No file chosen</span>
+        </div>
+        <div id="cpError" style="color:#ff6b6b;font-size:12px;margin-bottom:10px;display:none;"></div>
+        <div id="cpSuccess" style="color:var(--green);font-size:12.5px;margin-bottom:10px;display:none;"><i class="fa-solid fa-circle-check"></i> Message sent — we'll be in touch shortly.</div>
+        <button class="btn btn-orange" id="cpSubmitBtn" onclick="submitContactPage()"><i class="fa-solid fa-paper-plane"></i> <span id="cpSubmitLabel">SEND MESSAGE</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 <span>Voice Forge</span> Studios. Crafted for voices that command attention.
+</footer>
+
+<script src="contact.js"></script>
+</body>
+</html>

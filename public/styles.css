@@ -133,10 +133,14 @@
   }
   .mic-illustration{width:62%;max-width:340px;opacity:0.96;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.6));}
 
+  .hero-sidebar{
+    position:relative;z-index:3;display:flex;flex-direction:column;gap:20px;align-self:start;
+  }
+
   .book-card{
-    position:relative;z-index:3;background:rgba(18,18,20,0.92);
+    position:relative;background:rgba(18,18,20,0.92);
     border:1px solid var(--border);border-radius:8px;padding:24px;
-    backdrop-filter:blur(6px);align-self:start;
+    backdrop-filter:blur(6px);
     box-shadow:0 20px 50px rgba(0,0,0,0.45);
   }
   .book-card h3{font-size:18px;font-weight:700;}
@@ -352,11 +356,62 @@
   footer{padding:26px 0;text-align:center;color:var(--muted-2);font-size:12px;}
   footer span{color:var(--orange);}
 
+  /* ---------- BOOKING MODAL ---------- */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);
+    z-index:200;align-items:center;justify-content:center;padding:20px;
+    backdrop-filter:blur(3px);
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    position:relative;background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    padding:28px;width:100%;max-width:440px;max-height:88vh;overflow-y:auto;
+    box-shadow:0 30px 70px rgba(0,0,0,0.6);
+  }
+  .modal-close{
+    position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:50%;
+    background:var(--panel-2);color:var(--muted);display:flex;align-items:center;justify-content:center;
+  }
+  .modal-close:hover{color:var(--white);}
+  .modal-title{font-size:18px;font-weight:700;margin-bottom:4px;}
+  .modal-title span{color:var(--orange);}
+  .modal-sub{color:var(--muted);font-size:12.5px;margin-bottom:18px;}
+
+  .calendar-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .cal-month{font-family:'Oswald';font-size:13.5px;font-weight:600;letter-spacing:0.04em;}
+  .cal-arrow{
+    width:28px;height:28px;border-radius:50%;background:var(--panel-2);border:1px solid var(--border);
+    color:var(--silver);display:flex;align-items:center;justify-content:center;font-size:11px;
+  }
+  .cal-arrow:disabled{opacity:0.3;cursor:default;}
+  .cal-arrow:not(:disabled):hover{border-color:var(--orange);color:var(--orange-2);}
+  .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .cal-dow{text-align:center;font-family:'Oswald';font-size:10px;color:var(--muted-2);padding-bottom:4px;}
+  .cal-day{
+    aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:6px;
+    font-size:12.5px;color:var(--silver);cursor:pointer;background:var(--panel-2);border:1px solid transparent;
+  }
+  .cal-day:hover{border-color:var(--orange);color:var(--white);}
+  .cal-day.disabled{color:var(--muted-2);opacity:0.35;cursor:default;background:transparent;}
+  .cal-day.disabled:hover{border-color:transparent;color:var(--muted-2);}
+  .cal-day.empty{visibility:hidden;}
+  .cal-day.selected{background:var(--orange);color:#1a0d00;border-color:var(--orange);font-weight:600;}
+
+  .slots-label{font-family:'Oswald';font-size:11.5px;letter-spacing:0.05em;color:var(--muted);margin:16px 0 10px;text-transform:uppercase;}
+  .slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .slot-btn{
+    padding:9px 6px;border-radius:5px;background:var(--panel-2);border:1px solid var(--border);
+    color:var(--silver);font-size:12px;text-align:center;
+  }
+  .slot-btn:hover{border-color:var(--orange);color:var(--orange-2);}
+  .slot-btn.taken{opacity:0.3;text-decoration:line-through;cursor:default;background:transparent;}
+  .slot-btn.taken:hover{border-color:var(--border);color:var(--silver);}
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:1100px){
     .hero-inner{grid-template-columns:1fr;}
     .hero-visual{display:none;}
-    .book-card{max-width:420px;}
+    .book-card, .hero-sidebar{max-width:420px;}
     .grid-2col, .portfolio-wrap, .bottom-grid{grid-template-columns:1fr;}
     .portfolio-grid{grid-template-columns:repeat(2,1fr);}
     .feature-strip{grid-template-columns:repeat(2,1fr);}
@@ -368,4 +423,5 @@
     .wrap,.hero-inner,nav{padding-left:18px;padding-right:18px;}
     .portfolio-grid{grid-template-columns:1fr 1fr;}
     .player-card{flex-wrap:wrap;}
+    .slots-grid{grid-template-columns:repeat(2,1fr);}
   }

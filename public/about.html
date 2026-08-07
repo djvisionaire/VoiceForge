@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Voice Forge Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-hero{
+    padding:56px 0 40px;text-align:center;
+    background:radial-gradient(circle at 50% 0%, rgba(245,130,13,0.14), transparent 55%);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .page-hero .eyebrow{justify-content:center;display:flex;}
+  .page-hero h1{font-size:clamp(32px,5vw,52px);color:var(--silver);line-height:1.05;}
+  .page-hero h1 .accent{
+    color:var(--orange);
+    background:linear-gradient(180deg,var(--orange-2),var(--orange));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .page-hero p{color:var(--muted);font-size:14px;max-width:560px;margin:14px auto 0;line-height:1.6;}
+
+  .about-story{max-width:720px;margin:0 auto;color:var(--silver);font-size:14.5px;line-height:1.8;}
+  .about-story p{margin-bottom:16px;}
+
+  .stats-strip{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--panel);
+  }
+  .stat-item{
+    text-align:center;padding:26px 16px;border-right:1px solid var(--border);
+  }
+  .stat-item:last-child{border-right:none;}
+  .stat-num{font-family:'Oswald';font-size:32px;font-weight:700;color:var(--orange);}
+  .stat-label{font-family:'Oswald';font-size:11px;letter-spacing:0.08em;color:var(--muted);margin-top:4px;text-transform:uppercase;}
+
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .team-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:22px;text-align:center;}
+  .team-avatar{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 14px;
+    background:linear-gradient(150deg,#ffb27a,#8a4a2c);
+  }
+  .team-name{font-family:'Oswald';font-size:14.5px;font-weight:600;}
+  .team-role{color:var(--orange-2);font-size:11.5px;margin-top:2px;font-family:'Oswald';letter-spacing:0.04em;}
+  .team-bio{color:var(--muted);font-size:12.5px;margin-top:10px;line-height:1.6;}
+
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .value-card{padding:4px;}
+  .value-card i{color:var(--orange);font-size:22px;margin-bottom:12px;}
+  .value-card h5{font-family:'Oswald';font-size:14.5px;font-weight:600;margin-bottom:8px;}
+  .value-card p{color:var(--muted);font-size:12.5px;line-height:1.6;}
+
+  .about-cta{
+    text-align:center;padding:40px 32px;background:var(--panel);border:1px solid var(--border);
+    border-radius:10px;
+  }
+  .about-cta h3{font-size:20px;font-weight:700;margin-bottom:10px;}
+  .about-cta h3 span{color:var(--orange);}
+  .about-cta p{color:var(--muted);font-size:13.5px;margin-bottom:20px;}
+
+  @media (max-width:1100px){
+    .stats-strip{grid-template-columns:repeat(2,1fr);}
+    .team-grid,.values-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:640px){
+    .team-grid,.values-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark"><i class="fa-solid fa-microphone"></i><span class="f">F</span></div>
+      <div class="logo-text">
+        <div class="l1">VOICE <span>FORGE</span></div>
+        <div class="l2">STUDIOS</div>
+      </div>
+    </div>
+    <div class="navlinks">
+      <a href="/">HOME</a>
+      <a href="/#reels">DEMO REELS <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
+      <a href="/portfolio">PORTFOLIO</a>
+      <a href="/pricing">PRICING</a>
+      <a href="/ai-voices">AI VOICES</a>
+      <a href="/#book">BOOK SESSION</a>
+      <a href="/about" class="active">ABOUT</a>
+      <a href="/contact">CONTACT</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-ghost">LOGIN</button>
+      <button class="btn btn-orange">GET A QUOTE</button>
+    </div>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">THE STUDIO BEHIND THE MIC</div>
+    <h1>ABOUT <span class="accent">VOICE FORGE</span></h1>
+    <p>We're a team of voice actors, engineers, and directors who believe the right voice can make or break a message — so we obsess over getting it right.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="about-story">
+      <p>Voice Forge Studios started as a two-person operation recording radio spots out of a converted closet. Since then we've grown into a full-service voice production studio, but the obsession hasn't changed: every project gets treated like it's the only one on the schedule.</p>
+      <p>We work with brands, agencies, publishers, and indie creators who need a voice that actually lands — whether that's a 15-second ad that has to grab attention in the first three words, or a 12-hour audiobook that has to hold it for chapters at a time.</p>
+      <p>Today that means pairing experienced human voice talent with modern tools — including our own AI voice preview generator — so clients can hear exactly what they're getting before they commit to a full session.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="stats-strip">
+      <div class="stat-item"><div class="stat-num">2,400+</div><div class="stat-label">Projects Delivered</div></div>
+      <div class="stat-item"><div class="stat-num">180+</div><div class="stat-label">Active Clients</div></div>
+      <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">Years in Business</div></div>
+      <div class="stat-item"><div class="stat-num">98%</div><div class="stat-label">Client Satisfaction</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><span class="label">WHAT WE VALUE</span></div>
+    <div class="values-grid">
+      <div class="value-card">
+        <i class="fa-solid fa-bullseye"></i>
+        <h5>Direction Over Defaults</h5>
+        <p>We don't just hit record — every session is directed, so the delivery matches the intent of your script, not just the words on the page.</p>
+      </div>
+      <div class="value-card">
+        <i class="fa-solid fa-bolt"></i>
+        <h5>Speed Without Shortcuts</h5>
+        <p>Fast turnaround shouldn't mean rushed quality. Our workflow is built to move quickly while still catching every flubbed line.</p>
+      </div>
+      <div class="value-card">
+        <i class="fa-solid fa-lock"></i>
+        <h5>Your Project Stays Yours</h5>
+        <p>Scripts, recordings, and client data are handled with the same confidentiality you'd expect from any professional studio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><span class="label">MEET THE TEAM</span></div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar"></div>
+        <div class="team-name">Marcus Reid</div>
+        <div class="team-role">FOUNDER &amp; CREATIVE DIRECTOR</div>
+        <div class="team-bio">Started Voice Forge in 2017. Still personally directs every audiobook project that comes through the door.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(150deg,#8ac6ff,#2c4a8a);"></div>
+        <div class="team-name">Priya Anand</div>
+        <div class="team-role">HEAD OF PRODUCTION</div>
+        <div class="team-bio">Runs the day-to-day session pipeline and keeps every project on schedule without cutting corners.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(150deg,#ffd98a,#8a6a2c);"></div>
+        <div class="team-name">Dez Okafor</div>
+        <div class="team-role">LEAD SOUND ENGINEER</div>
+        <div class="team-bio">Mixes and masters every deliverable to broadcast spec, from 15-second spots to full-length audiobooks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="about-cta">
+      <h3>READY TO <span>WORK TOGETHER?</span></h3>
+      <p>Book a session directly, or reach out if you've got questions first.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a class="btn btn-orange" href="/#book"><i class="fa-regular fa-calendar"></i> BOOK A SESSION</a>
+        <a class="btn btn-outline" href="/contact"><i class="fa-solid fa-envelope"></i> CONTACT US</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 <span>Voice Forge</span> Studios. Crafted for voices that command attention.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Voice Generator — Voice Forge Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .ai-page-hero{
+    padding:56px 0 40px;text-align:center;
+    background:radial-gradient(circle at 50% 0%, rgba(245,130,13,0.14), transparent 55%);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .ai-page-hero .eyebrow{justify-content:center;display:flex;}
+  .ai-page-hero h1{font-size:clamp(32px,5vw,52px);color:var(--silver);line-height:1.05;}
+  .ai-page-hero h1 .accent{
+    color:var(--orange);
+    background:linear-gradient(180deg,var(--orange-2),var(--orange));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .ai-page-hero p{color:var(--muted);font-size:14px;max-width:520px;margin:14px auto 0;line-height:1.6;}
+  .ai-page-wrap{max-width:640px;margin:0 auto;padding:48px 32px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark"><i class="fa-solid fa-microphone"></i><span class="f">F</span></div>
+      <div class="logo-text">
+        <div class="l1">VOICE <span>FORGE</span></div>
+        <div class="l2">STUDIOS</div>
+      </div>
+    </div>
+    <div class="navlinks">
+      <a href="/">HOME</a>
+      <a href="/#reels">DEMO REELS <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
+      <a href="/portfolio">PORTFOLIO</a>
+      <a href="/pricing">PRICING</a>
+      <a href="/ai-voices" class="active">AI VOICES</a>
+      <a href="/#book">BOOK SESSION</a>
+      <a href="/about">ABOUT</a>
+      <a href="/contact">CONTACT</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-ghost">LOGIN</button>
+      <button class="btn btn-orange">GET A QUOTE</button>
+    </div>
+  </nav>
+</header>
+
+<section class="ai-page-hero">
+  <div class="wrap">
+    <div class="eyebrow">TYPE IT. HEAR IT. INSTANTLY.</div>
+    <h1>AI VOICE <span class="accent">GENERATOR</span></h1>
+    <p>Preview any script in a professional AI voice before booking a full studio session — powered by ElevenLabs, generated in seconds.</p>
+  </div>
+</section>
+
+<section>
+  <div class="ai-page-wrap">
+    <div class="ai-card" id="ai">
+      <div class="ai-card-head">
+        <h4>AI VOICE <span>GENERATOR</span></h4>
+        <span class="badge-green">POWERED BY ELEVENLABS</span>
+      </div>
+      <textarea class="ai-textarea" id="ttsText" maxlength="5000" oninput="document.getElementById('cc').textContent=this.value.length">Welcome to Voice Forge Studios. Where powerful voices bring your message to life.</textarea>
+      <div class="char-count"><span id="cc">72</span> / 5000</div>
+
+      <div class="field" style="margin-bottom:6px;">
+        <label>Voice</label>
+        <div class="select">
+          <select id="voiceSelect">
+            <option>Loading voices…</option>
+          </select>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom:6px;">
+        <label>Model</label>
+        <div class="select">
+          <select id="modelSelect">
+            <option value="eleven_flash_v2_5">Flash v2.5 (fastest)</option>
+            <option value="eleven_multilingual_v2">Multilingual v2 (highest quality)</option>
+            <option value="eleven_v3">Eleven v3 (most expressive)</option>
+          </select>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <button class="btn btn-orange" id="genBtn" onclick="generatePreview()"><i class="fa-solid fa-wave-square"></i> <span id="genBtnLabel">GENERATE PREVIEW</span></button>
+      <div id="genError" style="color:#ff6b6b;font-size:12px;margin-top:10px;display:none;"></div>
+
+      <div class="ai-preview">
+        <button class="play-round" id="aiPlayBtn" style="width:32px;height:32px;" onclick="toggleAiPlayback()"><i class="fa-solid fa-play" style="font-size:11px;"></i></button>
+        <div class="wave" id="aiWave"></div>
+        <span style="color:var(--muted-2);font-size:11px;white-space:nowrap;" id="aiTimeLabel">0:00 / 0:00</span>
+        <button class="icon-btn" id="aiDownloadBtn" style="width:28px;height:28px;"><i class="fa-solid fa-download" style="font-size:12px;"></i></button>
+      </div>
+      <audio id="ttsAudio" style="display:none;"></audio>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 <span>Voice Forge</span> Studios. Crafted for voices that command attention.
+</footer>
+
+<script src="ai-voices.js"></script>
+</body>
+</html>

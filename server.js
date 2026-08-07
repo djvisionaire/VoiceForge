@@ -6,11 +6,36 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 const ELEVENLABS_BASE = 'https://api.elevenlabs.io';
+
+const DATA_DIR = path.join(__dirname, 'data');
+const BOOKINGS_FILE = path.join(DATA_DIR, 'bookings.json');
+const MESSAGES_FILE = path.join(DATA_DIR, 'contact-messages.json');
+
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR);
+if (!fs.existsSync(BOOKINGS_FILE)) fs.writeFileSync(BOOKINGS_FILE, '[]');
+if (!fs.existsSync(MESSAGES_FILE)) fs.writeFileSync(MESSAGES_FILE, '[]');
+
+function readJsonFile(file){
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch {
+    return [];
+  }
+}
+
+function writeJsonFile(file, data){
+  fs.writeFileSync(file, JSON.stringify(data, null, 2));
+}
+
+function readBookings(){ return readJsonFile(BOOKINGS_FILE); }
+function writeBookings(bookings){ writeJsonFile(BOOKINGS_FILE, bookings); }
 
 if (!ELEVENLABS_API_KEY) {
   console.warn('⚠️  ELEVENLABS_API_KEY is not set. Add it to a .env file before starting real requests.');
@@ -19,6 +44,14 @@ if (!ELEVENLABS_API_KEY) {
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Clean URLs for standalone pages
+const PAGES = ['ai-voices', 'pricing', 'about', 'contact', 'portfolio'];
+PAGES.forEach(page => {
+  app.get(`/${page}`, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', `${page}.html`));
+  });
+});
 
 // GET /api/voices — list available voices for the account
 app.get('/api/voices', async (req, res) => {
@@ -90,6 +123,71 @@ app.post('/api/generate', async (req, res) => {
     console.error('Error generating speech:', err);
     res.status(500).json({ error: 'Failed to reach ElevenLabs API' });
   }
+});
+
+// GET /api/availability?date=YYYY-MM-DD — which time slots are already booked that day
+app.get('/api/availability', (req, res) => {
+  const { date } = req.query;
+  if (!date) return res.status(400).json({ error: 'date is required' });
+
+  const bookings = readBookings();
+  const taken = bookings.filter(b => b.date === date).map(b => b.time);
+  res.json({ date, taken });
+});
+
+// POST /api/bookings — create a new session booking
+// body: { projectType, scriptLength, deliveryTime, date, time, name, email, phone }
+app.post('/api/bookings', (req, res) => {
+  const { projectType, scriptLength, deliveryTime, date, time, name, email, phone } = req.body;
+
+  if (!date || !time || !name || !email) {
+    return res.status(400).json({ error: 'date, time, name, and email are required' });
+  }
+
+  const bookings = readBookings();
+
+  const conflict = bookings.some(b => b.date === date && b.time === time);
+  if (conflict) {
+    return res.status(409).json({ error: 'That time slot was just booked. Please choose another.' });
+  }
+
+  const booking = {
+    bookingId: crypto.randomBytes(4).toString('hex').toUpperCase(),
+    projectType, scriptLength, deliveryTime,
+    date, time, name, email, phone: phone || null,
+    createdAt: new Date().toISOString()
+  };
+
+  bookings.push(booking);
+  writeBookings(bookings);
+
+  res.status(201).json({ success: true, bookingId: booking.bookingId });
+});
+
+// POST /api/contact — store a contact form submission
+// body: { name, email, company, phone, projectType, budget, message }
+app.post('/api/contact', (req, res) => {
+  const { name, email, company, phone, projectType, budget, message } = req.body;
+
+  if (!name || !email) {
+    return res.status(400).json({ error: 'name and email are required' });
+  }
+
+  const messages = readJsonFile(MESSAGES_FILE);
+  const entry = {
+    id: crypto.randomBytes(4).toString('hex').toUpperCase(),
+    name, email,
+    company: company || null,
+    phone: phone || null,
+    projectType: projectType || null,
+    budget: budget || null,
+    message: message || null,
+    createdAt: new Date().toISOString()
+  };
+  messages.push(entry);
+  writeJsonFile(MESSAGES_FILE, messages);
+
+  res.status(201).json({ success: true, id: entry.id });
 });
 
 app.listen(PORT, () => {
