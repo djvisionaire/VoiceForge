@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Voice Forge Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .auth-wrap{
+    max-width:420px;margin:0 auto;padding:60px 32px 80px;
+  }
+  .auth-card{
+    background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:30px;
+  }
+  .auth-title{font-size:20px;font-weight:700;margin-bottom:6px;}
+  .auth-title span{color:var(--orange);}
+  .auth-sub{color:var(--muted);font-size:13px;margin-bottom:22px;}
+  .auth-tabs{display:flex;gap:6px;margin-bottom:24px;background:var(--panel-2);border-radius:6px;padding:4px;}
+  .auth-tab{
+    flex:1;text-align:center;padding:9px 0;border-radius:5px;cursor:pointer;
+    font-family:'Oswald';font-size:12.5px;letter-spacing:0.05em;color:var(--muted);
+  }
+  .auth-tab.active{background:var(--orange);color:#1a0d00;font-weight:600;}
+  .auth-form{display:none;}
+  .auth-form.active{display:block;}
+  .auth-error{color:#ff6b6b;font-size:12px;margin-bottom:12px;display:none;}
+  .auth-note{text-align:center;color:var(--muted-2);font-size:12px;margin-top:16px;}
+  .auth-note a{color:var(--orange-2);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark"><i class="fa-solid fa-microphone"></i><span class="f">F</span></div>
+      <div class="logo-text">
+        <div class="l1">VOICE <span>FORGE</span></div>
+        <div class="l2">STUDIOS</div>
+      </div>
+    </div>
+    <div class="navlinks">
+      <a href="/">HOME</a>
+      <a href="/#reels">DEMO REELS <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
+      <a href="/portfolio">PORTFOLIO</a>
+      <a href="/pricing">PRICING</a>
+      <a href="/ai-voices">AI VOICES</a>
+      <a href="/#book">BOOK SESSION</a>
+      <a href="/about">ABOUT</a>
+      <a href="/contact">CONTACT</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn btn-ghost" href="/login" id="navLoginBtn">LOGIN</a>
+      <button class="btn btn-orange" onclick="openQuoteModal()">GET A QUOTE</button>
+    </div>
+  </nav>
+</header>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-title">WELCOME <span>BACK</span></div>
+    <div class="auth-sub">Log in to view your bookings, or create an account.</div>
+
+    <div class="auth-tabs">
+      <div class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">LOG IN</div>
+      <div class="auth-tab" data-tab="signup" onclick="switchAuthTab('signup')">SIGN UP</div>
+    </div>
+
+    <!-- Login form -->
+    <div class="auth-form active" id="loginForm">
+      <div class="field"><label>Email</label><input class="input" id="loginEmail" placeholder="you@example.com"></div>
+      <div class="field"><label>Password</label><input class="input" id="loginPassword" type="password" placeholder="••••••••"></div>
+      <div class="auth-error" id="loginError"></div>
+      <button class="btn btn-orange" style="width:100%;" id="loginBtn" onclick="doLogin()">LOG IN</button>
+      <div class="auth-note" style="margin-top:14px;"><a href="#" onclick="showForgotView(); return false;">Forgot your password?</a></div>
+    </div>
+
+    <!-- Signup form -->
+    <div class="auth-form" id="signupForm">
+      <div class="field"><label>Name</label><input class="input" id="signupName" placeholder="Your name"></div>
+      <div class="field"><label>Email</label><input class="input" id="signupEmail" placeholder="you@example.com"></div>
+      <div class="field"><label>Password</label><input class="input" id="signupPassword" type="password" placeholder="At least 8 characters"></div>
+      <div class="auth-error" id="signupError"></div>
+      <button class="btn btn-orange" style="width:100%;" id="signupBtn" onclick="doSignup()">CREATE ACCOUNT</button>
+    </div>
+
+    <!-- Forgot password form -->
+    <div class="auth-form" id="forgotForm">
+      <p style="color:var(--muted);font-size:12.5px;margin-bottom:16px;">Enter your account email and we'll send you a link to reset your password.</p>
+      <div class="field"><label>Email</label><input class="input" id="forgotEmail" placeholder="you@example.com"></div>
+      <div class="auth-error" id="forgotError"></div>
+      <div id="forgotSuccess" style="color:var(--green);font-size:12.5px;margin-bottom:12px;display:none;"><i class="fa-solid fa-circle-check"></i> If an account exists for that email, a reset link is on its way.</div>
+      <button class="btn btn-orange" style="width:100%;" id="forgotBtn" onclick="doForgotPassword()">SEND RESET LINK</button>
+      <div class="auth-note" style="margin-top:14px;"><a href="#" onclick="switchAuthTab('login'); return false;">Back to log in</a></div>
+    </div>
+
+    <div class="auth-note" id="authTermsNote">By continuing you agree to our terms of service and privacy policy.</div>
+  </div>
+</div>
+
+<footer>
+  © 2026 <span>Voice Forge</span> Studios. Crafted for voices that command attention.
+</footer>
+
+<script src="login.js"></script>
+<script src="nav-auth.js"></script>
+<script src="quote.js"></script>
+</body>
+</html>

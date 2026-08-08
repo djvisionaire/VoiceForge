@@ -74,6 +74,10 @@ async function generatePreview(){
     });
 
     if(!res.ok){
+      if(res.status === 401){
+        window.location.href = '/login?redirect=/ai-voices';
+        return;
+      }
       const errText = await res.text();
       throw new Error(errText || ('Request failed (' + res.status + ')'));
     }
@@ -127,5 +131,22 @@ function toggleAiPlayback(){
   else { audio.pause(); icon.classList.replace('fa-pause','fa-play'); }
 }
 
-buildWave('aiWave', 60, 0.3);
-loadVoices();
+async function initAiVoicesPage(){
+  try{
+    const meRes = await fetch('/api/me');
+    if(!meRes.ok){
+      window.location.href = '/login?redirect=/ai-voices';
+      return;
+    }
+  } catch(err){
+    console.error(err);
+  }
+
+  document.getElementById('aiGateLoading').style.display = 'none';
+  document.getElementById('ai').style.display = 'block';
+
+  buildWave('aiWave', 60, 0.3);
+  loadVoices();
+}
+
+initAiVoicesPage();

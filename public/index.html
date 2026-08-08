@@ -31,8 +31,8 @@
       <a href="/contact">CONTACT</a>
     </div>
     <div class="nav-right">
-      <button class="btn btn-ghost">LOGIN</button>
-      <button class="btn btn-orange">GET A QUOTE</button>
+      <a class="btn btn-ghost" href="/login" id="navLoginBtn">LOGIN</a>
+      <button class="btn btn-orange" onclick="openQuoteModal()">GET A QUOTE</button>
     </div>
   </nav>
 </header>
@@ -73,7 +73,7 @@
       <div class="hero-btns">
         <button class="btn btn-orange"><i class="fa-solid fa-headphones"></i> LISTEN TO DEMOS</button>
         <button class="btn btn-outline"><i class="fa-regular fa-calendar"></i> BOOK SESSION</button>
-        <button class="btn btn-outline"><i class="fa-solid fa-dollar-sign"></i> GET INSTANT QUOTE</button>
+        <button class="btn btn-outline" onclick="openQuoteModal()"><i class="fa-solid fa-dollar-sign"></i> GET INSTANT QUOTE</button>
       </div>
     </div>
 
@@ -468,5 +468,7 @@
 </div>
 
 <script src="booking.js"></script>
+<script src="nav-auth.js"></script>
+<script src="quote.js"></script>
 </body>
 </html>
