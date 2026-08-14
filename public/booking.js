@@ -170,11 +170,49 @@ function renderSlots(dateKeyStr, taken){
   });
 }
 
+// Display-only mirror of server.js's BOOKING_BASE_PRICE table — the server
+// independently recomputes the real charge, this is just so people see an
+// estimate before being sent to Stripe.
+const BOOKING_BASE_PRICE = {
+  'Commercial': 150,
+  'Radio Ad': 130,
+  'Audiobook Narration': 120,
+  'Explainer Video': 200,
+  'Custom Take': null
+};
+const BOOKING_LENGTH_MULTIPLIER = {
+  'Up to 60 Seconds': 1,
+  '60–120 Seconds': 1.6,
+  'Full Audiobook Chapter': 3
+};
+const BOOKING_DELIVERY_MULTIPLIER = {
+  'Standard (3-5 Days)': 1,
+  'Rush (24-48 Hours)': 1.25,
+  'Same Day': 1.5
+};
+
+function renderBookingPricePreview(){
+  const projectType = document.getElementById('bookProjectType').value;
+  const scriptLength = document.getElementById('bookScriptLength').value;
+  const deliveryTime = document.getElementById('bookDeliveryTime').value;
+  const box = document.getElementById('bookPricePreview');
+
+  const base = BOOKING_BASE_PRICE[projectType];
+  if (base == null){
+    box.innerHTML = `<i class="fa-solid fa-comments"></i> Custom pricing — we'll follow up with a quote before anything is charged.`;
+    return;
+  }
+
+  const price = Math.round(base * (BOOKING_LENGTH_MULTIPLIER[scriptLength] ?? 1) * (BOOKING_DELIVERY_MULTIPLIER[deliveryTime] ?? 1));
+  box.innerHTML = `<i class="fa-solid fa-lock"></i> Total due today: $${price} — you'll be redirected to Stripe to pay securely.`;
+}
+
 function goToStep2(){
   if (!selectedDate || !selectedTime) return;
   updateSummary();
   const sub = document.getElementById('bookSummary2');
   sub.textContent += ` — ${formatDateLabel(selectedDate)} at ${formatTimeLabel(selectedTime)}`;
+  renderBookingPricePreview();
   document.getElementById('bookStep1').style.display = 'none';
   document.getElementById('bookStep2').style.display = 'block';
 }
@@ -233,8 +271,14 @@ async function submitBooking(){
       return;
     }
 
+    if (data.requiresPayment){
+      btn.textContent = 'REDIRECTING TO PAYMENT…';
+      window.location.href = data.checkoutUrl;
+      return; // leaving the page — no need to reset button state below
+    }
+
     document.getElementById('bookConfirmText').textContent =
-      `${formatDateLabel(selectedDate)} at ${formatTimeLabel(selectedTime)} — confirmation #${data.bookingId}. We've got your details and will follow up by email.`;
+      `${formatDateLabel(selectedDate)} at ${formatTimeLabel(selectedTime)} — confirmation #${data.bookingId}. This is custom-priced work, so we'll follow up by email with a quote before anything is charged.`;
     document.getElementById('bookStep2').style.display = 'none';
     document.getElementById('bookStep3').style.display = 'block';
 
@@ -244,8 +288,60 @@ async function submitBooking(){
     errBox.style.display = 'block';
   } finally {
     btn.disabled = false;
-    btn.textContent = 'CONFIRM BOOKING';
+    btn.textContent = 'CONFIRM & PAY';
   }
+}
+
+// ---------------- Returning from Stripe Checkout ----------------
+// Detects ?booking_success=1 or ?booking_cancelled=1 in the URL (Stripe
+// redirects back here after checkout) and shows the right confirmation.
+async function handleBookingReturn(){
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+
+  if (params.get('booking_success') === '1' && sessionId){
+    try{
+      const res = await fetch(`/api/bookings/confirm?session_id=${encodeURIComponent(sessionId)}`);
+      const data = await res.json();
+
+      if (res.ok && data.success){
+        const b = data.booking;
+        document.getElementById('bookStep1').style.display = 'none';
+        document.getElementById('bookStep2').style.display = 'none';
+        document.getElementById('bookConfirmText').textContent =
+          `${b.date} at ${b.time} — confirmation #${b.bookingId}. Payment received, you're all set!`;
+        document.getElementById('bookStep3').style.display = 'block';
+        document.getElementById('bookingModal').classList.add('open');
+      }
+    } catch(err){
+      console.error('Failed to confirm booking payment:', err);
+    } finally {
+      // Clean the URL so refreshing doesn't re-trigger this
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  } else if (params.get('booking_cancelled') === '1' && sessionId){
+    try{
+      await fetch(`/api/bookings/cancel?session_id=${encodeURIComponent(sessionId)}`);
+      showBookingToast('Checkout cancelled — no payment was taken, and that time slot is free again.');
+    } catch(err){
+      console.error('Failed to release cancelled booking hold:', err);
+    } finally {
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }
+}
+
+function showBookingToast(message){
+  const toast = document.createElement('div');
+  toast.textContent = message;
+  toast.style.cssText = `
+    position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:300;
+    background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--orange);
+    color:var(--white);padding:14px 20px;border-radius:6px;font-size:13px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);max-width:90vw;
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 6000);
 }
 
 // Close modal when clicking the dark overlay itself (not the box)
@@ -254,4 +350,5 @@ document.addEventListener('DOMContentLoaded', () => {
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) closeBookingModal();
   });
+  handleBookingReturn();
 });

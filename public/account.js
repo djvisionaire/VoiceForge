@@ -10,6 +10,12 @@ function formatTimeLabel(t){
   return `${h12}:${m.toString().padStart(2,'0')} ${period}`;
 }
 
+function formatPaymentLabel(b){
+  if (b.priceCents == null) return 'Custom pricing (we\'ll follow up)';
+  const amount = (b.priceCents / 100).toFixed(2);
+  return b.paid ? `Paid $${amount}` : `Awaiting payment — $${amount}`;
+}
+
 async function loadAccount(){
   try{
     const meRes = await fetch('/api/me');
@@ -38,7 +44,7 @@ async function loadAccount(){
           <div class="booking-row">
             <div>
               <div class="bk-main">${b.projectType} — ${formatDateLabel(b.date)} at ${formatTimeLabel(b.time)}</div>
-              <div class="bk-sub">${b.scriptLength} • ${b.deliveryTime} delivery</div>
+              <div class="bk-sub">${b.scriptLength} • ${b.deliveryTime} delivery • ${formatPaymentLabel(b)}</div>
             </div>
             <div class="bk-id">#${b.bookingId}</div>
           </div>

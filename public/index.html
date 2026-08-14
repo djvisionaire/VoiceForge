@@ -2,8 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="images/logo-full.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Voice Forge Studios — Professional Voice Overs</title>
+<meta name="description" content="Professional voice over studio for commercials, corporate narration, audiobooks, and explainer videos — plus a free instant AI voice generator. Book a session or get a quote today.">
+<meta name="keywords" content="voice over studio, voice actor, commercial voice over, corporate narration, audiobook narration, AI voice generator, professional voice talent, voice over services">
+<link rel="canonical" href="https://www.voiceforgestudios.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voice Forge Studios">
+<meta property="og:title" content="Voice Forge Studios — Professional Voice Overs & AI Voice Generation">
+<meta property="og:description" content="Professional voice over studio for commercials, corporate narration, audiobooks, and explainer videos — plus a free instant AI voice generator. Book a session or get a quote today.">
+<meta property="og:url" content="https://www.voiceforgestudios.com/">
+<meta property="og:image" content="https://www.voiceforgestudios.com/images/logo-full.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Voice Forge Studios — Professional Voice Overs & AI Voice Generation">
+<meta name="twitter:description" content="Professional voice over studio for commercials, corporate narration, audiobooks, and explainer videos — plus a free instant AI voice generator. Book a session or get a quote today.">
+<meta name="twitter:image" content="https://www.voiceforgestudios.com/images/logo-full.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -13,24 +27,21 @@
 
 <header>
   <nav>
-    <div class="logo">
-      <div class="logo-mark"><i class="fa-solid fa-microphone"></i><span class="f">F</span></div>
-      <div class="logo-text">
-        <div class="l1">VOICE <span>FORGE</span></div>
-        <div class="l2">STUDIOS</div>
-      </div>
-    </div>
+    <a href="/" class="logo">
+      <img src="images/logo.png" alt="Voice Forge Studios" class="logo-img">
+    </a>
     <div class="navlinks">
       <a href="/" class="active">HOME</a>
       <a href="/#reels">DEMO REELS <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
       <a href="/portfolio">PORTFOLIO</a>
       <a href="/pricing">PRICING</a>
-      <a href="/ai-voices">AI VOICES</a>
+      <a href="/tools">TOOLS</a>
       <a href="/#book">BOOK SESSION</a>
       <a href="/about">ABOUT</a>
       <a href="/contact">CONTACT</a>
     </div>
     <div class="nav-right">
+      <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
       <a class="btn btn-ghost" href="/login" id="navLoginBtn">LOGIN</a>
       <button class="btn btn-orange" onclick="openQuoteModal()">GET A QUOTE</button>
     </div>
@@ -151,14 +162,20 @@
       <a class="view-all" href="#">VIEW ALL REELS <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="reels-row" id="reelsRow">
-      <div class="reel-card"><div class="reel-thumb t1"><i class="fa-solid fa-play play-i"></i></div>
-        <div class="reel-info"><div class="row1"><span>Commercial</span><span class="dur">0:38</span></div><div class="tag">Energetic</div></div></div>
-      <div class="reel-card"><div class="reel-thumb t2"><i class="fa-solid fa-play play-i"></i></div>
-        <div class="reel-info"><div class="row1"><span>Corporate</span><span class="dur">0:46</span></div><div class="tag">Professional</div></div></div>
-      <div class="reel-card"><div class="reel-thumb t3"><i class="fa-solid fa-play play-i"></i></div>
-        <div class="reel-info"><div class="row1"><span>Movie Trailer</span><span class="dur">0:48</span></div><div class="tag">Epic</div></div></div>
-      <div class="reel-card"><div class="reel-thumb t4"><i class="fa-solid fa-play play-i"></i></div>
-        <div class="reel-info"><div class="row1"><span>Character Voices</span><span class="dur">0:41</span></div><div class="tag">Animated</div></div></div>
+      <div class="reel-card" onclick="toggleReelAudio(this, 'audio/commercial-demo-reel.mp3')"><div class="reel-thumb t1" id="reelThumb-0"><i class="fa-solid fa-play play-i"></i></div>
+        <div class="reel-info"><div class="row1"><span>Broadcast</span><span class="dur">0:20</span></div><div class="tag">Social Media</div></div></div>
+
+      <div class="reel-card" onclick="toggleReelAudio(this, 'audio/miguel-cinematic.mp3')"><div class="reel-thumb t3" id="reelThumb-1"><i class="fa-solid fa-play play-i"></i></div>
+        <div class="reel-info"><div class="row1"><span>Cinematic Trailer</span><span class="dur">0:10</span></div><div class="tag">Deep &amp; Rich</div></div></div>
+
+      <div class="reel-card" onclick="toggleReelAudio(this, 'audio/morgan-confident.mp3')"><div class="reel-thumb t2" id="reelThumb-2"><i class="fa-solid fa-play play-i"></i></div>
+        <div class="reel-info"><div class="row1"><span>Corporate</span><span class="dur">0:12</span></div><div class="tag">Deep &amp; Confident</div></div></div>
+
+      <div class="reel-card" onclick="openReelVideo('video/nature-narration.mp4')"><div class="reel-thumb" id="reelThumb-3" style="background-image:url('images/globe-thumb.png');background-size:cover;background-position:center;"><i class="fa-solid fa-play play-i"></i></div>
+        <div class="reel-info"><div class="row1"><span>Welcome to Voice Forge Studios</span><span class="dur">0:14</span></div><div class="tag">Cinematic</div></div></div>
+
+      <div class="reel-card" onclick="toggleReelAudio(this, 'audio/ai-preview-sample.mp3')"><div class="reel-thumb t6" id="reelThumb-4"><i class="fa-solid fa-play play-i"></i></div>
+        <div class="reel-info"><div class="row1"><span>AI Generated Sample</span><span class="dur">0:05</span></div><div class="tag">Custom Preview</div></div></div>
     </div>
   </div>
 </section>
@@ -352,6 +369,77 @@
     });
   }
 
+  /* ---------------- Demo Reels playback ---------------- */
+  let currentReelAudio = null;
+  let currentReelIcon = null;
+
+  function resetReelIcon(){
+    if(currentReelIcon){
+      currentReelIcon.classList.remove('fa-pause');
+      currentReelIcon.classList.add('fa-play');
+    }
+  }
+
+  function toggleReelAudio(cardEl, src){
+    const icon = cardEl.querySelector('.play-i');
+
+    // Clicking the card that's already playing → pause it
+    if(currentReelAudio && currentReelIcon === icon && !currentReelAudio.paused){
+      currentReelAudio.pause();
+      resetReelIcon();
+      return;
+    }
+
+    // Switching tracks (or resuming) → stop whatever was playing first
+    if(currentReelAudio){
+      currentReelAudio.pause();
+      resetReelIcon();
+    }
+
+    currentReelAudio = new Audio(src);
+    currentReelIcon = icon;
+    icon.classList.remove('fa-play');
+    icon.classList.add('fa-pause');
+
+    currentReelAudio.addEventListener('ended', () => {
+      resetReelIcon();
+      currentReelAudio = null;
+      currentReelIcon = null;
+    });
+
+    currentReelAudio.play();
+  }
+
+  function openReelVideo(src){
+    let modal = document.getElementById('reelVideoModal');
+    if(!modal){
+      document.body.insertAdjacentHTML('beforeend', `
+        <div class="modal-overlay" id="reelVideoModal">
+          <div class="modal-box" style="max-width:640px;padding:20px;">
+            <button class="modal-close" onclick="closeReelVideo()"><i class="fa-solid fa-xmark"></i></button>
+            <video id="reelVideoPlayer" controls autoplay style="width:100%;border-radius:6px;display:block;"></video>
+          </div>
+        </div>
+      `);
+      modal = document.getElementById('reelVideoModal');
+      modal.addEventListener('click', (e) => { if(e.target === modal) closeReelVideo(); });
+    }
+    // Pause any reel audio that might be playing
+    if(currentReelAudio){ currentReelAudio.pause(); resetReelIcon(); currentReelAudio = null; currentReelIcon = null; }
+
+    const player = document.getElementById('reelVideoPlayer');
+    player.src = src;
+    modal.classList.add('open');
+    player.play();
+  }
+
+  function closeReelVideo(){
+    const modal = document.getElementById('reelVideoModal');
+    const player = document.getElementById('reelVideoPlayer');
+    if(player){ player.pause(); }
+    if(modal){ modal.classList.remove('open'); }
+  }
+
   function formatTime(t){
     if(!isFinite(t)) return '0:00';
     const m = Math.floor(t/60), s = Math.floor(t%60);
@@ -390,18 +478,24 @@
     btn.disabled = true;
     label.textContent = 'SENDING…';
 
+    const payload = {
+      name, email,
+      company: document.getElementById('ctCompany').value.trim(),
+      phone: document.getElementById('ctPhone').value.trim(),
+      projectType: document.getElementById('ctProjectType').value,
+      budget: document.getElementById('ctBudget').value,
+      message: document.getElementById('ctMessage').value.trim()
+    };
+
+    // Formspree is a secondary notification channel — it fires alongside
+    // our own backend but never determines the form's success/error state.
+    submitToFormspree({ ...payload, _subject: 'New contact message — Voice Forge Studios' });
+
     try{
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name, email,
-          company: document.getElementById('ctCompany').value.trim(),
-          phone: document.getElementById('ctPhone').value.trim(),
-          projectType: document.getElementById('ctProjectType').value,
-          budget: document.getElementById('ctBudget').value,
-          message: document.getElementById('ctMessage').value.trim()
-        })
+        body: JSON.stringify(payload)
       });
       if(!res.ok){
         const data = await res.json().catch(() => ({}));
@@ -447,13 +541,14 @@
     <div id="bookStep2" style="display:none;">
       <h3 class="modal-title">YOUR <span>DETAILS</span></h3>
       <div class="modal-sub" id="bookSummary2"></div>
+      <div id="bookPricePreview" style="background:var(--panel-2);border:1px solid var(--border);border-radius:6px;padding:12px 14px;margin-bottom:16px;font-family:'Oswald';font-size:14px;color:var(--orange-2);"></div>
       <div class="field"><label>Name</label><input class="input" id="bkName" placeholder="Your name"></div>
       <div class="field"><label>Email</label><input class="input" id="bkEmail" placeholder="you@example.com"></div>
       <div class="field"><label>Phone (optional)</label><input class="input" id="bkPhone" placeholder="(555) 000-0000"></div>
       <div id="bookError" style="color:#ff6b6b;font-size:12px;margin-bottom:10px;display:none;"></div>
       <div style="display:flex;gap:12px;">
         <button class="btn btn-outline" style="flex:1;" onclick="backToStep1()">BACK</button>
-        <button class="btn btn-orange" id="confirmBookBtn" style="flex:2;" onclick="submitBooking()">CONFIRM BOOKING</button>
+        <button class="btn btn-orange" id="confirmBookBtn" style="flex:2;" onclick="submitBooking()">CONFIRM &amp; PAY</button>
       </div>
     </div>
 
@@ -470,5 +565,7 @@
 <script src="booking.js"></script>
 <script src="nav-auth.js"></script>
 <script src="quote.js"></script>
+<script src="nav-mobile.js"></script>
+<script src="formspree.js"></script>
 </body>
 </html>

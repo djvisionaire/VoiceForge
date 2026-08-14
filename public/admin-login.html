@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="images/logo-full.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — Voice Forge Studios</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{display:flex;align-items:center;justify-content:center;min-height:100vh;}
+  .admin-login-card{
+    width:100%;max-width:380px;background:var(--panel);border:1px solid var(--border);
+    border-radius:10px;padding:32px;text-align:center;
+  }
+  .admin-login-card img{height:44px;margin-bottom:18px;}
+  .admin-login-card h1{font-size:18px;font-weight:700;margin-bottom:6px;}
+  .admin-login-card h1 span{color:var(--orange);}
+  .admin-login-card p{color:var(--muted);font-size:12.5px;margin-bottom:22px;}
+  .auth-error{color:#ff6b6b;font-size:12px;margin-bottom:12px;display:none;text-align:left;}
+</style>
+</head>
+<body>
+
+<div class="admin-login-card">
+  <img src="images/logo.png" alt="Voice Forge Studios">
+  <h1>ADMIN <span>DASHBOARD</span></h1>
+  <p>This area is separate from customer accounts.</p>
+
+  <div class="field" style="text-align:left;">
+    <label>Password</label>
+    <input class="input" id="adminPassword" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter') doAdminLogin()">
+  </div>
+  <div class="auth-error" id="adminError"></div>
+  <button class="btn btn-orange" style="width:100%;" id="adminLoginBtn" onclick="doAdminLogin()">LOG IN</button>
+</div>
+
+<script src="admin-login.js"></script>
+</body>
+</html>

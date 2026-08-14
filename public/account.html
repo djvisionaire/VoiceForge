@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="images/logo-full.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Account — Voice Forge Studios</title>
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -34,24 +36,21 @@
 
 <header>
   <nav>
-    <div class="logo">
-      <div class="logo-mark"><i class="fa-solid fa-microphone"></i><span class="f">F</span></div>
-      <div class="logo-text">
-        <div class="l1">VOICE <span>FORGE</span></div>
-        <div class="l2">STUDIOS</div>
-      </div>
-    </div>
+    <a href="/" class="logo">
+      <img src="images/logo.png" alt="Voice Forge Studios" class="logo-img">
+    </a>
     <div class="navlinks">
       <a href="/">HOME</a>
       <a href="/#reels">DEMO REELS <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
       <a href="/portfolio">PORTFOLIO</a>
       <a href="/pricing">PRICING</a>
-      <a href="/ai-voices">AI VOICES</a>
+      <a href="/tools">TOOLS</a>
       <a href="/#book">BOOK SESSION</a>
       <a href="/about">ABOUT</a>
       <a href="/contact">CONTACT</a>
     </div>
     <div class="nav-right">
+      <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
       <a class="btn btn-ghost" href="/login" id="navLoginBtn">LOGIN</a>
       <button class="btn btn-orange" onclick="openQuoteModal()">GET A QUOTE</button>
     </div>
@@ -81,5 +80,7 @@
 
 <script src="account.js"></script>
 <script src="quote.js"></script>
+<script src="nav-mobile.js"></script>
+<script src="formspree.js"></script>
 </body>
 </html>

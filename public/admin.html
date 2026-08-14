@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="images/logo-full.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Voice Forge Studios</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .admin-wrap{max-width:960px;margin:0 auto;padding:32px 24px 80px;}
+  .admin-topbar{
+    display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;
+    padding-bottom:18px;border-bottom:1px solid var(--border-soft);flex-wrap:wrap;gap:12px;
+  }
+  .admin-topbar .brand{display:flex;align-items:center;gap:12px;}
+  .admin-topbar img{height:36px;}
+  .admin-topbar h1{font-size:18px;font-weight:700;}
+  .admin-topbar h1 span{color:var(--orange);}
+
+  .admin-tabs{display:flex;gap:8px;margin-bottom:22px;}
+  .admin-tab{
+    padding:10px 20px;border-radius:6px;background:var(--panel-2);border:1px solid var(--border);
+    color:var(--muted);font-family:'Oswald';font-size:12.5px;letter-spacing:0.04em;cursor:pointer;
+    display:flex;align-items:center;gap:8px;
+  }
+  .admin-tab.active{background:var(--orange);border-color:var(--orange);color:#1a0d00;font-weight:600;}
+  .admin-tab .count{
+    background:rgba(0,0,0,0.2);border-radius:10px;padding:1px 8px;font-size:11px;
+  }
+  .admin-tab:not(.active) .count{background:var(--panel);color:var(--silver);}
+
+  .admin-panel{display:none;}
+  .admin-panel.active{display:block;}
+
+  .data-row{
+    background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px 18px;
+    margin-bottom:10px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap;
+  }
+  .data-row.unread{border-color:var(--orange);}
+  .data-row .main{flex:1;min-width:200px;}
+  .data-row .main .t{font-family:'Oswald';font-size:14px;font-weight:600;}
+  .data-row .main .sub{color:var(--muted);font-size:12px;margin-top:4px;line-height:1.5;}
+  .data-row .main .msg{color:var(--silver);font-size:12.5px;margin-top:8px;line-height:1.5;background:var(--panel-2);padding:10px 12px;border-radius:5px;}
+  .data-row .meta{text-align:right;font-size:11px;color:var(--muted-2);white-space:nowrap;}
+  .data-row .actions{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+
+  .status-select{
+    background:var(--panel-2);border:1px solid var(--border);color:var(--white);
+    padding:7px 10px;border-radius:5px;font-size:11.5px;font-family:'Oswald';
+  }
+  .status-select.pending{color:var(--muted);}
+  .status-select.confirmed{color:#4b9cf0;}
+  .status-select.completed{color:var(--green);}
+  .status-select.cancelled{color:#ff6b6b;}
+
+  .mark-read-btn{
+    width:30px;height:30px;border-radius:50%;background:var(--panel-2);border:1px solid var(--border);
+    color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:12px;
+  }
+  .mark-read-btn.is-read{color:var(--green);}
+
+  #adminLoading{text-align:center;color:var(--muted);padding:60px 0;}
+  .empty-state{text-align:center;color:var(--muted);font-size:13.5px;padding:50px 20px;background:var(--panel);border:1px solid var(--border);border-radius:8px;}
+</style>
+</head>
+<body>
+
+<div class="admin-wrap">
+  <div id="adminLoading">Checking admin session…</div>
+
+  <div id="adminContent" style="display:none;">
+    <div class="admin-topbar">
+      <div class="brand">
+        <img src="images/logo.png" alt="Voice Forge Studios">
+        <h1>ADMIN <span>DASHBOARD</span></h1>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <a class="btn btn-outline" href="/"><i class="fa-solid fa-arrow-left"></i> BACK TO SITE</a>
+        <button class="btn btn-outline" onclick="doAdminLogout()"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT</button>
+      </div>
+    </div>
+
+    <div class="admin-tabs">
+      <div class="admin-tab active" data-tab="bookings" onclick="switchAdminTab('bookings')">
+        BOOKINGS <span class="count" id="bookingsCount">0</span>
+      </div>
+      <div class="admin-tab" data-tab="messages" onclick="switchAdminTab('messages')">
+        MESSAGES <span class="count" id="messagesCount">0</span>
+      </div>
+    </div>
+
+    <div class="admin-panel active" id="bookingsPanel">
+      <div id="bookingsList"></div>
+    </div>
+
+    <div class="admin-panel" id="messagesPanel">
+      <div id="messagesList"></div>
+    </div>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

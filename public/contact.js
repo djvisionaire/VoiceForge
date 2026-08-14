@@ -23,18 +23,24 @@ async function submitContactPage(){
   btn.disabled = true;
   label.textContent = 'SENDING…';
 
+  const payload = {
+    name, email,
+    company: document.getElementById('cpCompany').value.trim(),
+    phone: document.getElementById('cpPhone').value.trim(),
+    projectType: document.getElementById('cpProjectType').value,
+    budget: document.getElementById('cpBudget').value,
+    message: document.getElementById('cpMessage').value.trim()
+  };
+
+  // Formspree is a secondary notification channel — it fires alongside
+  // our own backend but never determines the form's success/error state.
+  submitToFormspree({ ...payload, _subject: 'New contact message — Voice Forge Studios' });
+
   try{
     const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name, email,
-        company: document.getElementById('cpCompany').value.trim(),
-        phone: document.getElementById('cpPhone').value.trim(),
-        projectType: document.getElementById('cpProjectType').value,
-        budget: document.getElementById('cpBudget').value,
-        message: document.getElementById('cpMessage').value.trim()
-      })
+      body: JSON.stringify(payload)
     });
 
     if (!res.ok){

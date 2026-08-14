@@ -197,16 +197,17 @@ async function sendQuoteEmail(){
   const type = document.getElementById('quoteProjectType').value;
   const amount = document.getElementById('quoteAmount').textContent;
   const detail = document.getElementById('quoteDetail').textContent;
+  const message = `Instant quote request — estimate shown: ${amount}. ${detail}`;
+
+  // Formspree is a secondary notification channel — it fires alongside
+  // our own backend but never determines the form's success/error state.
+  submitToFormspree({ name, email, projectType: type, message, _subject: 'New instant quote request — Voice Forge Studios' });
 
   try{
     const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name, email,
-        projectType: type,
-        message: `Instant quote request — estimate shown: ${amount}. ${detail}`
-      })
+      body: JSON.stringify({ name, email, projectType: type, message })
     });
     if (!res.ok) throw new Error();
     successBox.style.display = 'block';

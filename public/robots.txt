@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /account
+Disallow: /reset-password
+Disallow: /admin
+Disallow: /admin-login
+Disallow: /api/
+
+Sitemap: https://www.voiceforgestudios.com/sitemap.xml

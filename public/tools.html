@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="images/logo-full.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools — AI Voice Generator, Cloning &amp; Dubbing — Voice Forge Studios</title>
+<meta name="description" content="Free AI-powered tools from Voice Forge Studios: generate voice previews, clone a voice, dub audio into other languages, and clean up noisy recordings — powered by ElevenLabs.">
+<meta name="keywords" content="AI voice generator, voice cloning, audio dubbing, voice isolator, text to speech, ElevenLabs, audio cleanup">
+<link rel="canonical" href="https://www.voiceforgestudios.com/tools">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voice Forge Studios">
+<meta property="og:title" content="Tools — AI Voice Generator, Cloning & Dubbing — Voice Forge Studios">
+<meta property="og:description" content="Free AI-powered tools from Voice Forge Studios: generate voice previews, clone a voice, dub audio into other languages, and clean up noisy recordings — powered by ElevenLabs.">
+<meta property="og:url" content="https://www.voiceforgestudios.com/tools">
+<meta property="og:image" content="https://www.voiceforgestudios.com/images/logo-full.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tools — AI Voice Generator, Cloning & Dubbing — Voice Forge Studios">
+<meta name="twitter:description" content="Free AI-powered tools from Voice Forge Studios: generate voice previews, clone a voice, dub audio into other languages, and clean up noisy recordings — powered by ElevenLabs.">
+<meta name="twitter:image" content="https://www.voiceforgestudios.com/images/logo-full.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .ai-page-hero{
+    padding:56px 0 40px;text-align:center;
+    background:radial-gradient(circle at 50% 0%, rgba(245,130,13,0.14), transparent 55%);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .ai-page-hero .eyebrow{justify-content:center;display:flex;}
+  .ai-page-hero h1{font-size:clamp(32px,5vw,52px);color:var(--silver);line-height:1.05;}
+  .ai-page-hero h1 .accent{
+    color:var(--orange);
+    background:linear-gradient(180deg,var(--orange-2),var(--orange));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .ai-page-hero p{color:var(--muted);font-size:14px;max-width:520px;margin:14px auto 0;line-height:1.6;}
+  .ai-page-wrap{max-width:640px;margin:0 auto;padding:48px 32px;}
+
+  .tool-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+  .tool-tab{
+    padding:10px 18px;border-radius:6px;background:var(--panel-2);border:1px solid var(--border);
+    color:var(--muted);font-family:'Oswald';font-size:12px;letter-spacing:0.04em;cursor:pointer;
+    display:flex;align-items:center;gap:8px;white-space:nowrap;
+  }
+  .tool-tab.active{background:var(--orange);border-color:var(--orange);color:#1a0d00;font-weight:600;}
+  .tool-panel{display:none;}
+  .tool-panel.active{display:block;}
+
+  .upload-drop{
+    border:1.5px dashed var(--border);border-radius:8px;padding:24px;text-align:center;
+    color:var(--muted);font-size:12.5px;cursor:pointer;background:var(--panel-2);
+  }
+  .upload-drop:hover{border-color:var(--orange);}
+  .upload-drop i{font-size:22px;color:var(--muted-2);display:block;margin-bottom:8px;}
+  .upload-drop .fname{color:var(--silver);font-weight:600;margin-top:6px;}
+  .tool-note{color:var(--muted-2);font-size:11.5px;margin-top:8px;line-height:1.5;}
+  .dub-progress{
+    text-align:center;padding:30px 20px;color:var(--muted);font-size:13px;
+  }
+  .dub-progress i{font-size:26px;color:var(--orange);display:block;margin-bottom:12px;}
+  .result-block{
+    background:var(--panel-2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:16px;
+  }
+  .result-block .label{font-family:'Oswald';font-size:11px;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+
+  .billing-panel{
+    background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:22px;
+  }
+  .billing-plan-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .billing-plan-badge{
+    font-family:'Oswald';font-size:11px;font-weight:700;letter-spacing:0.06em;padding:5px 12px;border-radius:20px;
+  }
+  .billing-plan-badge.free{background:var(--panel-2);color:var(--muted);border:1px solid var(--border);}
+  .billing-plan-badge.pro{background:var(--orange);color:#1a0d00;}
+  .billing-renews{color:var(--muted-2);font-size:11.5px;margin-left:10px;}
+  .billing-note{color:var(--muted);font-size:12px;margin-top:10px;line-height:1.5;}
+  .credit-buy-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .credit-buy-btn{
+    padding:7px 14px;border-radius:5px;background:var(--panel-2);border:1px solid var(--border);
+    color:var(--orange-2);font-family:'Oswald';font-size:11px;letter-spacing:0.03em;white-space:nowrap;
+  }
+  .credit-buy-btn:hover{border-color:var(--orange);}
+
+  .saved-clone-row{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    background:var(--panel-2);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:8px;
+  }
+  .saved-clone-row .name{font-family:'Oswald';font-size:13px;font-weight:600;}
+  .saved-clone-row .date{color:var(--muted-2);font-size:11px;margin-top:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="/" class="logo">
+      <img src="images/logo.png" alt="Voice Forge Studios" class="logo-img">
+    </a>
+    <div class="navlinks">
+      <a href="/">HOME</a>
+      <a href="/#reels">DEMO REELS <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
+      <a href="/portfolio">PORTFOLIO</a>
+      <a href="/pricing">PRICING</a>
+      <a href="/tools" class="active">TOOLS</a>
+      <a href="/#book">BOOK SESSION</a>
+      <a href="/about">ABOUT</a>
+      <a href="/contact">CONTACT</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+      <a class="btn btn-ghost" href="/login" id="navLoginBtn">LOGIN</a>
+      <button class="btn btn-orange" onclick="openQuoteModal()">GET A QUOTE</button>
+    </div>
+  </nav>
+</header>
+
+<section class="ai-page-hero">
+  <div class="wrap">
+    <div class="eyebrow">TYPE IT. CLONE IT. TRANSLATE IT. CLEAN IT UP.</div>
+    <h1>AI VOICE <span class="accent">TOOLS</span></h1>
+    <p>Free AI-powered tools powered by ElevenLabs — generate a voice preview, clone a voice, dub into another language, or clean up a noisy recording.</p>
+  </div>
+</section>
+
+<section>
+  <div class="ai-page-wrap" style="max-width:720px;">
+    <div id="aiGateLoading" style="text-align:center;color:var(--muted);padding:40px 0;">Checking your session…</div>
+
+    <div id="toolsContent" style="display:none;">
+      <div class="billing-panel">
+        <div class="billing-plan-row">
+          <div>
+            <span class="billing-plan-badge free" id="planBadge">FREE</span>
+            <span class="billing-renews" id="planRenewsNote" style="display:none;"></span>
+          </div>
+          <div id="planActionArea"></div>
+        </div>
+        <div class="billing-note">Pro gets higher daily limits on every tool below. Prefer to pay as you go instead? Buy one-time credit packs per tool — see the "Buy credits" link under each tool's usage.</div>
+      </div>
+
+      <div class="tool-tabs">
+        <div class="tool-tab active" data-tab="generator" onclick="switchToolTab('generator')"><i class="fa-solid fa-microphone"></i> VOICE GENERATOR</div>
+        <div class="tool-tab" data-tab="cloning" onclick="switchToolTab('cloning')"><i class="fa-solid fa-clone"></i> VOICE CLONING</div>
+        <div class="tool-tab" data-tab="dubbing" onclick="switchToolTab('dubbing')"><i class="fa-solid fa-language"></i> DUBBING</div>
+        <div class="tool-tab" data-tab="cleanup" onclick="switchToolTab('cleanup')"><i class="fa-solid fa-broom"></i> AUDIO CLEANUP</div>
+      </div>
+
+      <!-- ===================== VOICE GENERATOR ===================== -->
+      <div class="tool-panel active" id="panel-generator">
+        <div class="ai-card" id="ai">
+          <div class="ai-card-head">
+            <h4>AI VOICE <span>GENERATOR</span></h4>
+            <span class="badge-green">POWERED BY ELEVENLABS</span>
+          </div>
+          <textarea class="ai-textarea" id="ttsText" maxlength="5000" oninput="document.getElementById('cc').textContent=this.value.length">Welcome to Voice Forge Studios. Where powerful voices bring your message to life.</textarea>
+          <div class="char-count"><span id="cc">72</span> / 5000</div>
+
+          <div class="field" style="margin-bottom:6px;">
+            <label>Voice</label>
+            <div class="select">
+              <select id="voiceSelect">
+                <option>Loading voices…</option>
+              </select>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom:6px;">
+            <label>Model</label>
+            <div class="select">
+              <select id="modelSelect">
+                <option value="eleven_flash_v2_5">Flash v2.5 (fastest)</option>
+                <option value="eleven_multilingual_v2">Multilingual v2 (highest quality)</option>
+                <option value="eleven_v3">Eleven v3 (most expressive)</option>
+              </select>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+
+          <button class="btn btn-orange" id="genBtn" onclick="generatePreview()"><i class="fa-solid fa-wave-square"></i> <span id="genBtnLabel">GENERATE PREVIEW</span></button>
+          <div id="genError" style="color:#ff6b6b;font-size:12px;margin-top:10px;display:none;"></div>
+
+          <div class="ai-preview">
+            <button class="play-round" id="aiPlayBtn" style="width:32px;height:32px;" onclick="toggleAiPlayback()"><i class="fa-solid fa-play" style="font-size:11px;"></i></button>
+            <div class="wave" id="aiWave"></div>
+            <span style="color:var(--muted-2);font-size:11px;white-space:nowrap;" id="aiTimeLabel">0:00 / 0:00</span>
+            <button class="icon-btn" id="aiDownloadBtn" style="width:28px;height:28px;"><i class="fa-solid fa-download" style="font-size:12px;"></i></button>
+          </div>
+          <audio id="ttsAudio" style="display:none;"></audio>
+        </div>
+      </div>
+
+      <!-- ===================== VOICE CLONING ===================== -->
+      <div class="tool-panel" id="panel-cloning">
+        <div class="ai-card">
+          <div class="ai-card-head">
+            <h4>VOICE <span>CLONING</span></h4>
+            <span class="badge-green">POWERED BY ELEVENLABS</span>
+          </div>
+
+          <div id="cloneUploadStep">
+            <div class="field">
+              <label>Voice Name</label>
+              <input class="input" id="cloneName" placeholder="e.g. My Brand Voice">
+            </div>
+
+            <div class="field">
+              <label>Audio Samples (1–3 files)</label>
+              <div class="upload-drop" onclick="document.getElementById('cloneFiles').click()">
+                <i class="fa-solid fa-file-audio"></i>
+                Click to choose clean audio clips (30 sec–5 min works best)
+                <div class="fname" id="cloneFileNames"></div>
+              </div>
+              <input type="file" id="cloneFiles" accept="audio/*" multiple style="display:none;" onchange="onCloneFilesChosen()">
+              <div class="tool-note">No background noise, single speaker, consistent tone gives the best clone quality.</div>
+            </div>
+
+            <div class="field" style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="cloneRemoveNoise" checked style="width:16px;height:16px;">
+              <label style="margin:0;" for="cloneRemoveNoise">Remove background noise from samples</label>
+            </div>
+
+            <div class="tool-note" id="cloneUsageNote" style="margin-bottom:6px;"></div>
+            <div class="credit-buy-row" id="cloneCreditBuyRow"></div>
+            <button class="btn btn-orange" id="cloneBtn" onclick="submitVoiceClone()"><i class="fa-solid fa-clone"></i> <span id="cloneBtnLabel">CLONE VOICE</span></button>
+            <div id="cloneError" style="color:#ff6b6b;font-size:12px;margin-top:10px;display:none;"></div>
+          </div>
+
+          <div id="cloneResultStep" style="display:none;">
+            <div class="result-block">
+              <div class="label">Cloned Voice</div>
+              <div id="cloneResultName" style="font-family:'Oswald';font-size:15px;font-weight:600;margin-bottom:14px;"></div>
+
+              <textarea class="ai-textarea" id="cloneTtsText" maxlength="5000">Hi there — this is what my cloned voice sounds like.</textarea>
+              <button class="btn btn-orange" style="width:100%;margin-top:12px;" id="cloneGenBtn" onclick="generateFromClone()"><i class="fa-solid fa-wave-square"></i> <span id="cloneGenBtnLabel">GENERATE PREVIEW</span></button>
+              <div id="cloneGenError" style="color:#ff6b6b;font-size:12px;margin-top:10px;display:none;"></div>
+
+              <div class="ai-preview" style="margin-top:14px;">
+                <button class="play-round" id="cloneAiPlayBtn" style="width:32px;height:32px;" onclick="toggleCloneAiPlayback()"><i class="fa-solid fa-play" style="font-size:11px;"></i></button>
+                <div class="wave" id="cloneAiWave"></div>
+                <span style="color:var(--muted-2);font-size:11px;white-space:nowrap;" id="cloneAiTimeLabel">0:00 / 0:00</span>
+                <button class="icon-btn" id="cloneAiDownloadBtn" style="width:28px;height:28px;"><i class="fa-solid fa-download" style="font-size:12px;"></i></button>
+              </div>
+              <audio id="cloneTtsAudio" style="display:none;"></audio>
+            </div>
+
+            <button class="btn btn-orange" style="width:100%;margin-top:14px;" id="saveCloneBtn" onclick="submitSaveClone()"><i class="fa-solid fa-floppy-disk"></i> <span id="saveCloneBtnLabel">SAVE THIS CLONE PERMANENTLY — $19</span></button>
+            <button class="btn btn-outline" style="width:100%;margin-top:10px;" onclick="deleteClonedVoice()"><i class="fa-solid fa-trash"></i> DELETE THIS CLONE</button>
+            <div class="tool-note" style="text-align:center;" id="cloneTemporaryNote">This clone is temporary and will be deleted if you don't save it — testing clones count toward your ElevenLabs voice slot limit either way.</div>
+            <button class="btn btn-outline" style="width:100%;margin-top:10px;" onclick="backToCloneUpload()"><i class="fa-solid fa-rotate-left"></i> CLONE A DIFFERENT VOICE</button>
+          </div>
+
+          <div class="section-head" style="margin-top:28px;"><span class="label">MY SAVED VOICES</span></div>
+          <div id="savedClonesList"></div>
+        </div>
+      </div>
+
+      <!-- ===================== DUBBING ===================== -->
+      <div class="tool-panel" id="panel-dubbing">
+        <div class="ai-card">
+          <div class="ai-card-head">
+            <h4>AUDIO/VIDEO <span>DUBBING</span></h4>
+            <span class="badge-green">POWERED BY ELEVENLABS</span>
+          </div>
+
+          <div id="dubUploadStep">
+            <div class="field">
+              <label>Audio or Video File</label>
+              <div class="upload-drop" onclick="document.getElementById('dubFile').click()">
+                <i class="fa-solid fa-file-video"></i>
+                Click to choose an audio or video file
+                <div class="fname" id="dubFileName"></div>
+              </div>
+              <input type="file" id="dubFile" accept="audio/*,video/*" style="display:none;" onchange="onDubFileChosen()">
+            </div>
+
+            <div class="field">
+              <label>Target Language</label>
+              <div class="select">
+                <select id="dubTargetLang">
+                  <option value="es">Spanish</option>
+                  <option value="fr">French</option>
+                  <option value="de">German</option>
+                  <option value="pt">Portuguese</option>
+                  <option value="it">Italian</option>
+                  <option value="ja">Japanese</option>
+                  <option value="ko">Korean</option>
+                  <option value="zh">Chinese</option>
+                  <option value="hi">Hindi</option>
+                  <option value="ar">Arabic</option>
+                  <option value="ru">Russian</option>
+                </select>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+
+            <div class="field" style="margin-bottom:6px;">
+              <label>Source Language</label>
+              <div class="select">
+                <select id="dubSourceLang">
+                  <option value="auto">Auto-detect</option>
+                  <option value="en">English</option>
+                  <option value="es">Spanish</option>
+                  <option value="fr">French</option>
+                  <option value="de">German</option>
+                </select>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+
+            <div class="tool-note" id="dubUsageNote" style="margin-bottom:6px;"></div>
+            <div class="credit-buy-row" id="dubCreditBuyRow"></div>
+            <button class="btn btn-orange" id="dubBtn" onclick="submitDub()"><i class="fa-solid fa-language"></i> <span id="dubBtnLabel">START DUBBING</span></button>
+            <div id="dubError" style="color:#ff6b6b;font-size:12px;margin-top:10px;display:none;"></div>
+            <div class="tool-note">Dubbing runs on ElevenLabs' servers and can take a few minutes for longer files — feel free to leave this tab open and check back.</div>
+          </div>
+
+          <div class="dub-progress" id="dubProgressStep" style="display:none;">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <div>Dubbing in progress… this page will update automatically.</div>
+          </div>
+
+          <div id="dubResultStep" style="display:none;">
+            <div class="result-block">
+              <div class="label">Dubbed Result</div>
+              <video id="dubResultPlayer" controls style="width:100%;border-radius:6px;display:none;"></video>
+              <audio id="dubResultAudioPlayer" controls style="width:100%;display:none;"></audio>
+              <a class="btn btn-outline" style="width:100%;margin-top:12px;" id="dubDownloadBtn" download="dubbed-result"><i class="fa-solid fa-download"></i> DOWNLOAD</a>
+            </div>
+            <button class="btn btn-outline" style="width:100%;margin-top:14px;" onclick="resetDubTool()"><i class="fa-solid fa-rotate-left"></i> DUB ANOTHER FILE</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== AUDIO CLEANUP ===================== -->
+      <div class="tool-panel" id="panel-cleanup">
+        <div class="ai-card">
+          <div class="ai-card-head">
+            <h4>AUDIO <span>CLEANUP</span></h4>
+            <span class="badge-green">POWERED BY ELEVENLABS</span>
+          </div>
+
+          <div id="cleanupUploadStep">
+            <div class="field">
+              <label>Noisy Audio File</label>
+              <div class="upload-drop" onclick="document.getElementById('cleanupFile').click()">
+                <i class="fa-solid fa-file-waveform"></i>
+                Click to choose an audio file to clean up
+                <div class="fname" id="cleanupFileName"></div>
+              </div>
+              <input type="file" id="cleanupFile" accept="audio/*" style="display:none;" onchange="onCleanupFileChosen()">
+              <div class="tool-note">Strips background noise, hum, and room tone — great for rough phone or webcam recordings.</div>
+            </div>
+
+            <div class="tool-note" id="cleanupUsageNote" style="margin-bottom:6px;"></div>
+            <div class="credit-buy-row" id="cleanupCreditBuyRow"></div>
+            <button class="btn btn-orange" id="cleanupBtn" onclick="submitCleanup()"><i class="fa-solid fa-broom"></i> <span id="cleanupBtnLabel">CLEAN AUDIO</span></button>
+            <div id="cleanupError" style="color:#ff6b6b;font-size:12px;margin-top:10px;display:none;"></div>
+          </div>
+
+          <div id="cleanupResultStep" style="display:none;">
+            <div class="result-block">
+              <div class="label">Original</div>
+              <audio id="cleanupOriginalPlayer" controls style="width:100%;"></audio>
+            </div>
+            <div class="result-block">
+              <div class="label">Cleaned</div>
+              <audio id="cleanupResultPlayer" controls style="width:100%;"></audio>
+              <a class="btn btn-outline" style="width:100%;margin-top:12px;" id="cleanupDownloadBtn" download="cleaned-audio.mp3"><i class="fa-solid fa-download"></i> DOWNLOAD</a>
+            </div>
+            <button class="btn btn-outline" style="width:100%;margin-top:14px;" onclick="resetCleanupTool()"><i class="fa-solid fa-rotate-left"></i> CLEAN ANOTHER FILE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 <span>Voice Forge</span> Studios. Crafted for voices that command attention.
+</footer>
+
+<script src="tools.js"></script>
+<script src="nav-auth.js"></script>
+<script src="quote.js"></script>
+<script src="nav-mobile.js"></script>
+<script src="formspree.js"></script>
+</body>
+</html>
