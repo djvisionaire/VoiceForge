@@ -1,0 +1,75 @@
+services:
+  - type: web
+    name: voice-forge-studios
+    runtime: node
+    plan: starter
+    region: oregon
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+
+    disk:
+      name: voice-forge-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
+
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+
+      - key: PORT
+        value: 3000
+
+      # --- Secrets & config you'll fill in during setup (Render will prompt
+      # for each one marked sync: false — nothing sensitive is stored in the repo) ---
+      - key: SESSION_SECRET
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: APP_BASE_URL
+        sync: false
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+
+      # --- Email notifications (optional — leave blank in the dashboard to disable) ---
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_SECURE
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: NOTIFY_EMAIL
+        sync: false
+
+      # --- Pricing/limits — sensible defaults baked in here directly since
+      # these aren't secrets; change them in the Render dashboard any time ---
+      - key: DEPOSIT_PERCENT
+        value: 100
+      - key: DAILY_LIMIT_CLONE
+        value: 3
+      - key: DAILY_LIMIT_DUB
+        value: 3
+      - key: DAILY_LIMIT_CLEANUP
+        value: 5
+      - key: DAILY_LIMIT_CLONE_PRO
+        value: 20
+      - key: DAILY_LIMIT_DUB_PRO
+        value: 15
+      - key: DAILY_LIMIT_CLEANUP_PRO
+        value: 40
+      - key: PRO_MONTHLY_PRICE_CENTS
+        value: 1500
+      - key: CLONE_PACK_PRICE_CENTS
+        value: 1200
+      - key: DUB_PACK_PRICE_CENTS
+        value: 1500
+      - key: CLEANUP_PACK_PRICE_CENTS
+        value: 1000
+      - key: SAVE_CLONE_PRICE_CENTS
+        value: 1900
