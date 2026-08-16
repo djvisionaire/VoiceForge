@@ -129,6 +129,52 @@ show a proper preview card instead of a bare URL.
 - `robots.txt` and `sitemap.xml` are static files in `public/`, served
   automatically — no server code needed for those two.
 
+## Audio Editor
+
+A fifth tab on the Tools page — runs entirely in the browser via the Web
+Audio API, no server calls involved in the editing itself:
+
+- Upload any audio file, or click the "send to editor" button that now
+  appears next to results from the Voice Generator, Cloning, Dubbing, and
+  Cleanup tools, to edit them directly without downloading and
+  re-uploading.
+- Click-drag on the waveform to select a region, then **Trim to
+  Selection** or **Delete Selection**. A plain click (no drag) seeks
+  playback there instead.
+- **Fade In / Fade Out** — applies over the current selection if one
+  exists, otherwise a default 1-second fade at the start/end of the clip.
+- **Normalize** scales the loudest peak up to just under 0dB.
+- A volume slider (±24dB) with an explicit "Apply" step, so adjusting it
+  doesn't commit until you're sure.
+- Full **undo/redo** — every edit is a new snapshot, never a mutation of
+  a previous state, so undo always restores exactly what was there before.
+- **Download** exports a 16-bit PCM WAV file, encoded by hand in
+  JavaScript (the Web Audio API has no built-in encoder).
+
+### Effects
+
+Four effects, each rendered via `OfflineAudioContext` (a real Web Audio
+signal graph, not just sample math) and applied to the whole clip:
+
+- **Echo** — adjustable delay time and number of repeats (feedback amount).
+- **Reverb** — algorithmic, using a synthetically generated impulse
+  response (decaying noise) rather than a recorded sample — adjustable
+  room size (decay length) and wet/dry mix.
+- **Chorus** — an LFO-modulated delay line for a thickened, doubled-voice
+  effect. Fixed parameters, one-click.
+- **Telephone/Lo-Fi** — a band-pass filter (300Hz–3.4kHz, the classic
+  phone-line range) plus light waveshaper saturation for grit. Fixed
+  parameters, one-click.
+
+Rendering happens asynchronously — the button disables and shows
+"RENDERING…" while it works, since a reverb tail on a longer clip can take
+a moment. Every effect application is its own undo/redo step, same as
+trim/fade/normalize.
+
+Since this is 100% client-side, it doesn't count against any of the
+daily usage limits or credits — it's free and unlimited regardless of
+plan.
+
 ## Tools billing: Pro subscription, credit packs, saved clones
 
 The Tools page is now a real product with three ways to pay, all on top
@@ -302,6 +348,36 @@ A few things worth knowing:
   no additional `.env` setup needed, but each of these calls costs
   ElevenLabs credits separately, so keep an eye on usage if this gets
   real traffic.
+
+## Deploying (Render)
+
+`render.yaml` in this repo is a Render Blueprint — it defines the web
+service, a persistent disk for `data/` (so bookings/users/messages
+survive every redeploy), and every environment variable the app needs,
+so most of the setup is automatic instead of clicked through by hand.
+
+1. Push this repo to GitHub (if you haven't already).
+2. In Render: **New → Blueprint**, connect this repo. Render reads
+   `render.yaml` and shows you the service it's about to create.
+3. Render will prompt you to fill in the values marked as secrets:
+   `SESSION_SECRET`, `ADMIN_PASSWORD`, `APP_BASE_URL`,
+   `ELEVENLABS_API_KEY`, `STRIPE_SECRET_KEY`, and the `SMTP_*` /
+   `NOTIFY_EMAIL` vars if you want booking emails. Pricing/limit vars
+   already have sensible defaults baked into `render.yaml` — change them
+   in the dashboard any time without touching code.
+4. Set `APP_BASE_URL` to whatever your Render URL will be (e.g.
+   `https://voice-forge-studios.onrender.com`), or your custom domain if
+   you're attaching one — update it again later if you add a custom domain.
+5. Deploy. Render installs dependencies, starts `node server.js`, and
+   the persistent disk mounts at `/opt/render/project/src/data`
+   automatically — no manual disk setup needed.
+6. **Turn off GitHub Pages** on the repo if you had it enabled (Settings
+   → Pages → Source → None) — it can't run this app and will just serve
+   a confusing static fallback instead.
+7. Once it's live, come back and find-and-replace the placeholder domain
+   (`voiceforgestudios.com`) across `public/*.html`, `robots.txt`, and
+   `sitemap.xml` with your real domain, and switch `STRIPE_SECRET_KEY`
+   to a live key (`sk_live_...`) when you're ready to take real payments.
 
 ## How the pieces fit together
 
